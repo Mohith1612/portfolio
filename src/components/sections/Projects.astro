@@ -1,0 +1,59 @@
+---
+const projects = [
+    {
+        title: "",
+        description: "",
+        year: "",
+        link: "#",
+        github: "#",
+    }
+];
+---
+
+<section class="w-full py-24 px-6 md:px-0" id="projects">
+    <div class="max-w-3xl mx-auto">
+        <span
+            class="text-xs font-mono uppercase tracking-widest text-muted-foreground block mb-12"
+            >Selected Work</span
+        >
+
+        <div class="flex flex-col space-y-0">
+            {
+                projects.map((project) => (
+                    <div class="group py-8 border-b border-border hover:border-accent transition-colors duration-300 relative">
+                        <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-medium text-foreground group-hover:text-accent transition-colors duration-300">
+                                    {project.title}
+                                </h3>
+                                <p class="text-muted-foreground group-hover:text-foreground transition-colors duration-300 mt-2 max-w-lg">
+                                    {project.description}
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col items-end gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 transform md:translate-x-4 md:group-hover:translate-x-0">
+                                <div class="flex gap-4 text-sm">
+                                    <a
+                                        href={project.link}
+                                        class="text-foreground border-b border-foreground/50 hover:border-foreground pb-0.5 transition-all"
+                                    >
+                                        View Live
+                                    </a>
+                                    <a
+                                        href={project.github}
+                                        class="text-muted-foreground hover:text-foreground transition-colors"
+                                    >
+                                        GitHub
+                                    </a>
+                                </div>
+                                <span class="text-xs font-mono text-muted-foreground mt-2">
+                                    {project.year}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

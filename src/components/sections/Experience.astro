@@ -1,0 +1,43 @@
+---
+const experience = [
+    {
+        company: "SiteSmart India Pvt. Ltd.",
+        role: "Founding Engineer",
+        period: "2025 — Present",
+    },
+    {
+        company: "SwayamRise",
+        role: "Full Stack & AI Engineer (Intern)",
+        period: "2025 — 2025",
+    }
+];
+---
+
+<section class="w-full py-24 px-6 md:px-0" id="experience">
+    <div class="max-w-3xl mx-auto">
+        <span
+            class="text-xs font-mono uppercase tracking-widest text-muted-foreground block mb-12"
+            >Experience</span
+        >
+
+        <div class="space-y-0">
+            {
+                experience.map((job) => (
+                    <div class="group flex flex-col md:flex-row md:items-baseline justify-between py-6 border-b border-border hover:border-accent transition-colors duration-300 cursor-default">
+                        <div class="flex flex-col md:flex-row gap-2 md:gap-8 items-baseline">
+                            <h3 class="text-lg font-medium text-foreground group-hover:text-accent transition-colors duration-300">
+                                {job.company}
+                            </h3>
+                            <span class="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                                {job.role}
+                            </span>
+                        </div>
+                        <span class="text-xs font-mono text-muted-foreground mt-2 md:mt-0">
+                            {job.period}
+                        </span>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
