@@ -1,0 +1,28 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full py-12 px-6 border-t border-border mt-12 bg-muted/20">
+  <div
+    class="max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground"
+  >
+    <div
+      class="flex flex-col gap-1 items-center md:items-start order-2 md:order-1"
+    >
+      <span class="text-xs">Available for select collaborations.</span>
+      <span class="opacity-50 text-xs font-mono">
+        &copy; {year} mohith16.com
+      </span>
+    </div>
+
+    <div class="flex gap-8 order-1 md:order-2">
+      <a
+        href="mailto:mohith.dev16@gmail.com"
+        class="hover:text-foreground transition-colors">Email</a
+      >
+      <a href="#" class="hover:text-foreground transition-colors">Twitter</a>
+      <a href="https://github.com/Mohith1612" class="hover:text-foreground transition-colors">GitHub</a>
+      <a href="https://linkedin.com/in/mohith16/" class="hover:text-foreground transition-colors">LinkedIn</a>
+    </div>
+  </div>
+</footer>
