@@ -1,22 +1,63 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/navigation/Navbar";
+import ThemeToggle from "../components/ui/ThemeToggle";
+import CustomCursor from "../components/cursor/CustomCursor";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Portfolio" } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+
+		<script is:inline>
+			(function () {
+				try {
+					const localTheme = localStorage.getItem("theme");
+					const supportDarkMode = window.matchMedia(
+						"(prefers-color-scheme: dark)",
+					).matches;
+
+					if (
+						localTheme === "light" ||
+						(!localTheme && !supportDarkMode)
+					) {
+						document.documentElement.classList.add("light");
+					} else {
+						document.documentElement.classList.remove("light");
+					}
+				} catch (e) {
+					console.error("Theme setup failed", e);
+				}
+			})();
+		</script>
 	</head>
-	<body>
-		<slot />
+	<body
+		class="bg-background text-foreground antialiased selection:bg-accent selection:text-white transition-colors duration-500"
+	>
+		<!-- Interactive Systems -->
+		<CustomCursor client:load />
+		<Navbar client:load />
+
+		<!-- Fixed Theme Toggle (Always Accessible) -->
+		<div class="fixed top-6 right-6 z-50">
+			<ThemeToggle client:load />
+		</div>
+
+		<main class="w-full flex-1 flex flex-col items-center">
+			<slot />
+		</main>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
