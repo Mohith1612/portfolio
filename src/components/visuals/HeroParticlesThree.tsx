@@ -44,7 +44,7 @@ export default function HeroParticlesThree() {
             size: 0.008,
             color: new THREE.Color(color),
             transparent: true,
-            opacity: isLight ? 0.3 : 0.4,
+            opacity: isLight ? 0.6 : 0.3,
             sizeAttenuation: true,
         });
 
