@@ -4,11 +4,13 @@ const experience = [
         company: "SiteSmart India Pvt. Ltd.",
         role: "Founding Engineer",
         period: "2025 — Present",
+        link: "https://www.sitesmart.co.in",
     },
     {
         company: "SwayamRise",
         role: "Full Stack & AI Engineer (Intern)",
         period: "2025 — 2025",
+        link: "https://swayamrise.com",
     },
 ];
 ---
@@ -26,7 +28,14 @@ const experience = [
                     <div class="group flex flex-col md:flex-row md:items-baseline justify-between py-6 border-b border-border hover:border-accent transition-colors duration-300 cursor-default">
                         <div class="flex flex-col md:flex-row gap-2 md:gap-8 items-baseline">
                             <h3 class="text-lg font-medium text-foreground group-hover:text-accent transition-colors duration-300">
-                                {job.company}
+                                <a
+                                    href={job.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    class="hover:underline focus:outline-none"
+                                >
+                                    {job.company}
+                                </a>
                             </h3>
                             <span class="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                                 {job.role}
