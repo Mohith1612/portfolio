@@ -28,12 +28,12 @@ const ideas = [
               href={item.link}
               target="_blank"
               rel="noreferrer"
-              class="flex items-baseline justify-between group"
+              class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 md:gap-4 group"
             >
               <span class="text-lg text-muted-foreground group-hover:text-accent transition-colors duration-300">
                 {item.title}
               </span>
-              <span class="text-xs font-mono text-muted-foreground/50">
+              <span class="text-xs font-mono text-muted-foreground/50 shrink-0 self-end md:self-auto">
                 {item.date}
               </span>
             </a>
