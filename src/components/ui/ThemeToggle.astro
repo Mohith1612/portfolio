@@ -1,0 +1,48 @@
+<button
+  type="button"
+  data-theme-toggle
+  aria-label="Switch to light mode"
+  aria-pressed="false"
+  class="inline-flex min-h-11 min-w-14 items-center justify-center px-2 font-mono text-xs uppercase tracking-widest text-muted-foreground transition-[color,transform] duration-200 hover:text-foreground active:scale-95"
+>
+  <span data-theme-label aria-hidden="true">Light</span>
+</button>
+
+<script>
+  const themeToggle = document.querySelector<HTMLButtonElement>(
+    "[data-theme-toggle]",
+  );
+  const themeLabel = themeToggle?.querySelector<HTMLElement>("[data-theme-label]");
+
+  const applyTheme = (theme: "light" | "dark", persist = true) => {
+    const nextLabel = theme === "light" ? "Dark" : "Light";
+
+    document.documentElement.classList.toggle("light", theme === "light");
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", theme === "light" ? "#fbfaf7" : "#090909");
+
+    if (themeToggle && themeLabel) {
+      themeToggle.setAttribute("aria-pressed", String(theme === "light"));
+      themeToggle.setAttribute("aria-label", `Switch to ${nextLabel.toLowerCase()} mode`);
+      themeLabel.textContent = nextLabel;
+    }
+
+    if (persist) {
+      localStorage.setItem("theme", theme);
+    }
+  };
+
+  const initialTheme =
+    document.documentElement.dataset.theme === "light" ? "light" : "dark";
+
+  applyTheme(initialTheme, false);
+
+  themeToggle?.addEventListener("click", () => {
+    const currentTheme =
+      document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    applyTheme(currentTheme === "light" ? "dark" : "light");
+  });
+</script>

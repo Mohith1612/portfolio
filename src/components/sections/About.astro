@@ -1,36 +1,45 @@
 ---
-
+import { education, skillGroups } from "../../data/portfolio";
 ---
 
 <section class="w-full py-24 px-6 md:px-0" id="about">
   <div class="max-w-2xl mx-auto space-y-12">
-    <span
-      class="text-xs font-mono uppercase tracking-widest text-muted-foreground block mb-8"
-      >About</span
-    >
+    <h2 class="section-label mb-8">About</h2>
 
     <div
-      class="prose prose-lg dark:prose-invert text-muted-foreground leading-relaxed"
+      class="text-pretty space-y-5 text-lg leading-relaxed text-muted-foreground"
     >
       <p>
-        My work is an ongoing effort to design and build backend systems that
-        are clear, resilient, and dependable in real-world use. I take
-        responsibility for how software behaves in production and aim to create
-        systems that respect both operational limits and the people who rely on
-        them.
+        I design backend and distributed systems that stay understandable under
+        load, failure, and change. My work spans API architecture, realtime
+        collaboration, storage internals, cloud infrastructure, and the
+        observability needed to operate them with confidence.
       </p>
       <p>
-        I specialize in backend architecture, where I design and maintain
-        services and infrastructure that support complex behavior while
-        remaining predictable, observable, and easy to reason about. My process
-        is deliberately reductive: I remove unnecessary layers until the
-        system's core responsibilities are explicit and well-defined.
-      </p>
-      <p>
-        Currently, I focus on end-to-end backend development, static-first and
-        API-driven architectures, and the practical application of DevOps
-        practices to deliver reliable, scalable systems in production.
+        I currently work as the founding engineer at SiteSmart India, where I
+        built the backend from scratch and helped take the mobile product to
+        general availability. Outside work, I build systems projects, contribute
+        to open source, and write about the engineering tradeoffs I encounter.
       </p>
     </div>
+
+    <dl class="grid gap-6 border-t border-border pt-8">
+      {skillGroups.map((group) => (
+        <div class="grid gap-2 md:grid-cols-[8rem_1fr] md:gap-6">
+          <dt class="text-xs font-mono uppercase tracking-wider text-foreground">
+            {group.label}
+          </dt>
+          <dd class="text-sm leading-relaxed text-muted-foreground">
+            {group.items}
+          </dd>
+        </div>
+      ))}
+      <div class="grid gap-2 md:grid-cols-[8rem_1fr] md:gap-6">
+        <dt class="text-xs font-mono uppercase tracking-wider text-foreground">Education</dt>
+        <dd class="text-sm leading-relaxed text-muted-foreground">
+          {education[0].degree.replace("Bachelor of Technology", "B.Tech")} · {education[0].school} · 2025
+        </dd>
+      </div>
+    </dl>
   </div>
 </section>

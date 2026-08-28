@@ -1,0 +1,39 @@
+---
+import { openSource } from "../../data/portfolio";
+---
+
+<section class="w-full py-24 px-6 md:px-0" id="open-source">
+  <div class="max-w-3xl mx-auto">
+    <div class="mb-12 flex items-end justify-between gap-6">
+      <h2 class="section-label">
+        Open Source
+      </h2>
+      <span class="hidden text-xs text-muted-foreground md:block">Selected contributions</span>
+    </div>
+
+    <div class="grid md:grid-cols-2 border-t border-border">
+      {openSource.map((item) => (
+        <article class="border-b border-border py-7 md:odd:pr-8 md:even:border-l md:even:pl-8">
+          <div class="flex items-baseline justify-between gap-4">
+            <h3 class="text-lg font-medium">
+              <a class="transition-colors duration-200 hover:text-accent" href={item.contributionLink} target="_blank" rel="noreferrer">
+                {item.project}
+              </a>
+            </h3>
+            <span class="text-xs font-mono text-muted-foreground shrink-0">
+              {item.contribution}
+            </span>
+          </div>
+          <p class="mt-1 font-mono text-xs text-muted-foreground">{item.organization}</p>
+          <p class="text-pretty mt-4 text-sm leading-relaxed text-muted-foreground">
+            {item.description}
+          </p>
+          <div class="mt-2 flex gap-5">
+            <a class="text-link text-link--accent" href={item.contributionLink} target="_blank" rel="noreferrer">Contribution ↗</a>
+            <a class="text-link text-link--accent" href={item.repo} target="_blank" rel="noreferrer">Repository ↗</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

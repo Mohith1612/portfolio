@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Page Not Found — Mohith N"
+  description="The requested page could not be found."
+  robots="noindex, follow"
+  showNavigation={false}
+>
+  <section class="hero-section flex w-full items-center px-6">
+    <div class="mx-auto w-full max-w-2xl">
+      <p class="section-label mb-6">404</p>
+      <h1 class="text-balance text-4xl font-semibold tracking-[-0.035em] md:text-6xl">
+        This page does not exist.
+      </h1>
+      <p class="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-muted-foreground">
+        The address may have changed, or the page may have moved back into the system.
+      </p>
+      <a class="text-link text-link--accent mt-6" href="/">Return home →</a>
+    </div>
+  </section>
+</Layout>

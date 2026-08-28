@@ -1,33 +1,27 @@
 ---
-const ideas = [
-  {
-    title: "Why Freehand Drawing Becomes a Bottleneck",
-    date: "2026-05-05",
-    link: "https://blog.mohith16.com/posts/building-canvas-03-freehand-drawing",
-  },
-  {
-    title: "Inside the Rendering Engine of a Canvas App",
-    date: "2026-05-03",
-    link: "https://blog.mohith16.com/posts/building-canvas-02-rendering-engine",
-  },
-  {
-    title: "What Building a Drawing App Taught Me About Performance",
-    date: "2026-04-30",
-    link: "https://blog.mohith16.com/posts/building-canvas-01-about",
-  },
-];
+import { profile, writing } from "../../data/portfolio";
+
+const formatDate = (date: string) =>
+  new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${date}T00:00:00Z`));
 ---
 
 <section class="w-full py-24 px-6 md:px-0" id="writing">
   <div class="max-w-2xl mx-auto">
-    <span
-      class="text-xs font-mono uppercase tracking-widest text-muted-foreground block mb-12"
-      >Writing</span
-    >
+    <div class="mb-12 flex items-baseline justify-between gap-6">
+      <h2 class="section-label">Writing</h2>
+      <a class="text-link text-link--accent min-h-0 text-xs" href={profile.blog} target="_blank" rel="noreferrer">
+        All writing ↗
+      </a>
+    </div>
 
     <ul class="space-y-6">
       {
-        ideas.map((item) => (
+        writing.map((item) => (
           <li>
             <a
               href={item.link}
@@ -35,12 +29,12 @@ const ideas = [
               rel="noreferrer"
               class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 md:gap-4 group"
             >
-              <span class="text-lg text-muted-foreground group-hover:text-accent transition-colors duration-300">
+              <h3 class="text-pretty text-lg text-muted-foreground transition-colors duration-200 group-hover:text-accent">
                 {item.title}
-              </span>
-              <span class="text-xs font-mono text-muted-foreground/50 shrink-0 self-end md:self-auto">
-                {item.date}
-              </span>
+              </h3>
+              <time datetime={item.date} class="tabular-nums shrink-0 self-end font-mono text-xs text-muted-foreground md:self-auto">
+                {formatDate(item.date)}
+              </time>
             </a>
           </li>
         ))

@@ -1,4 +1,5 @@
 ---
+import { profile } from "../../data/portfolio";
 const year = new Date().getFullYear();
 ---
 
@@ -10,25 +11,35 @@ const year = new Date().getFullYear();
       class="flex flex-col gap-1 items-center md:items-start order-2 md:order-1"
     >
       <span class="text-xs">Available for select collaborations.</span>
-      <span class="opacity-50 text-xs font-mono">
+      <span class="text-xs font-mono">
         &copy; {year} mohith16.com
       </span>
     </div>
 
-    <div class="flex gap-8 order-1 md:order-2">
+    <nav aria-label="Footer navigation" class="order-1 flex flex-wrap justify-center gap-x-6 md:order-2">
       <a
-        href="mailto:mohith.dev16@gmail.com"
-        class="hover:text-foreground transition-colors">Email</a
+        href={`mailto:${profile.email}`}
+        class="text-link">Email</a
       >
-      <a href="#" class="hover:text-foreground transition-colors">Twitter</a>
+      <a href="/resume" class="text-link">Résumé</a>
       <a
-        href="https://github.com/Mohith1612"
-        class="hover:text-foreground transition-colors">GitHub</a
+        href={profile.github}
+        target="_blank"
+        rel="noreferrer"
+        class="text-link">GitHub</a
       >
       <a
-        href="https://linkedin.com/in/mohith16/"
-        class="hover:text-foreground transition-colors">LinkedIn</a
+        href={profile.linkedin}
+        target="_blank"
+        rel="noreferrer"
+        class="text-link">LinkedIn</a
       >
-    </div>
+      <a
+        href={profile.scholar}
+        target="_blank"
+        rel="noreferrer"
+        class="text-link">Scholar</a
+      >
+    </nav>
   </div>
 </footer>

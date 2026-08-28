@@ -1,0 +1,120 @@
+<div class="custom-cursor" data-custom-cursor data-visible="false" data-hovered="false" aria-hidden="true"></div>
+
+<script>
+  const cursor = document.querySelector<HTMLElement>("[data-custom-cursor]");
+  const supportsCursor = window.matchMedia(
+    "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+  );
+
+  if (cursor) {
+    let x = 0;
+    let y = 0;
+    let hovered = false;
+    let animationFrame = 0;
+
+    const updateCursorSupport = () => {
+      document.documentElement.classList.toggle(
+        "custom-cursor-active",
+        supportsCursor.matches,
+      );
+
+      if (!supportsCursor.matches) {
+        cursor.dataset.visible = "false";
+      }
+    };
+
+    const render = () => {
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(${hovered ? 1.5 : 1})`;
+      animationFrame = 0;
+    };
+
+    const scheduleRender = () => {
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(render);
+      }
+    };
+
+    window.addEventListener(
+      "mousemove",
+      (event) => {
+        if (!supportsCursor.matches) return;
+
+        x = event.clientX;
+        y = event.clientY;
+        cursor.dataset.visible = "true";
+        scheduleRender();
+      },
+      { passive: true },
+    );
+
+    document.addEventListener(
+      "mouseover",
+      (event) => {
+        if (!supportsCursor.matches) return;
+
+        const target = event.target;
+        const isInteractive =
+          target instanceof Element &&
+          Boolean(
+            target.closest(
+              "a, button, input, textarea, select, summary, [role='button']",
+            ),
+          );
+
+        hovered = isInteractive;
+        cursor.dataset.visible = "true";
+        cursor.dataset.hovered = String(hovered);
+        scheduleRender();
+      },
+      { passive: true },
+    );
+
+    document.addEventListener("mouseleave", () => {
+      cursor.dataset.visible = "false";
+    });
+
+    document.addEventListener("mouseenter", () => {
+      if (supportsCursor.matches) cursor.dataset.visible = "true";
+    });
+
+    supportsCursor.addEventListener("change", updateCursorSupport);
+    updateCursorSupport();
+  }
+</script>
+
+<style>
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: none;
+    width: 0.75rem;
+    height: 0.75rem;
+    pointer-events: none;
+    border-radius: 999px;
+    background: #a33333;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transform: translate3d(-2rem, -2rem, 0) translate(-50%, -50%) scale(1);
+    transition:
+      opacity 120ms ease-out,
+      transform 100ms ease-out;
+    will-change: transform;
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .custom-cursor {
+      display: block;
+    }
+
+    .custom-cursor[data-visible="true"] {
+      opacity: 1;
+    }
+
+    :global(html.custom-cursor-active),
+    :global(html.custom-cursor-active *) {
+      cursor: none !important;
+    }
+  }
+</style>

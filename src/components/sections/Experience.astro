@@ -1,50 +1,40 @@
 ---
-const experience = [
-    {
-        company: "SiteSmart India Pvt. Ltd.",
-        role: "Founding Engineer",
-        period: "2025 — Present",
-        link: "https://www.sitesmart.co.in",
-    },
-    {
-        company: "SwayamRise",
-        role: "Full Stack & AI Engineer (Intern)",
-        period: "2025 — 2025",
-        link: "https://swayamrise.com",
-    },
-];
+import { experience } from "../../data/portfolio";
 ---
 
 <section class="w-full py-24 px-6 md:px-0" id="experience">
     <div class="max-w-3xl mx-auto">
-        <span
-            class="text-xs font-mono uppercase tracking-widest text-muted-foreground block mb-12"
-            >Experience</span
-        >
+        <h2 class="section-label mb-12">Experience</h2>
 
         <div class="space-y-0">
             {
                 experience.map((job) => (
-                    <div class="group flex flex-col md:flex-row md:items-baseline justify-between py-6 border-b border-border hover:border-accent transition-colors duration-300 cursor-default">
-                        <div class="flex flex-col md:flex-row gap-2 md:gap-8 items-baseline">
-                            <h3 class="text-lg font-medium text-foreground group-hover:text-accent transition-colors duration-300">
-                                <a
-                                    href={job.link}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    class="hover:underline focus:outline-none"
-                                >
-                                    {job.company}
-                                </a>
+                    <article class="grid gap-5 border-b border-border py-8 md:grid-cols-[1fr_auto]">
+                        <div>
+                          <div class="flex flex-col md:flex-row gap-2 md:gap-8 items-baseline">
+                            <h3 class="text-lg font-medium text-foreground">
+                              {job.company}
                             </h3>
-                            <span class="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                            <span class="text-sm text-muted-foreground">
                                 {job.role}
                             </span>
+                          </div>
+                          <p class="text-pretty mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                            {job.summary}
+                          </p>
+                          <p class="mt-3 font-mono text-xs text-muted-foreground">
+                            {job.detail}
+                          </p>
+                          {job.proof && (
+                            <p class="mt-3 font-mono text-xs text-foreground">
+                              {job.proof}
+                            </p>
+                          )}
                         </div>
-                        <span class="text-xs font-mono text-muted-foreground mt-2 md:mt-0">
+                        <span class="tabular-nums mt-2 font-mono text-xs text-muted-foreground md:mt-0">
                             {job.period}
                         </span>
-                    </div>
+                    </article>
                 ))
             }
         </div>

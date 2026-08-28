@@ -1,0 +1,912 @@
+{
+  "meta": {
+    "name": "Mohith N",
+    "email": "mohith.work16@gmail.com",
+    "phone": "+91 79756 99920",
+    "location": "Bangalore, India",
+    "linkedin": "https://linkedin.com/in/Mohith16",
+    "github": "https://github.com/Mohith1612",
+    "website": "https://mohith16.com",
+    "blog": "https://blog.mohith16.com",
+    "scholar": "https://scholar.google.com/citations?user=hILiGwUAAAAJ&hl=en"
+  },
+  "experience": [
+    {
+      "id": "exp-sitesmart",
+      "company": "SiteSmart India",
+      "role": "Founding Engineer",
+      "dates": "May 2025 -- Present",
+      "location": "India",
+      "tags": [
+        "backend",
+        "systems",
+        "api",
+        "aws",
+        "postgres",
+        "mobile",
+        "release-engineering"
+      ],
+      "links": {
+        "company": null
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Architected and built the backend from scratch using FastAPI in a serverless AWS Lambda setup (via Mangum)",
+          "impact": "enabled scalable and cost-efficient infrastructure for an early-stage construction project management platform",
+          "metrics": "serving ~50 users with 10–15 DAU"
+        },
+        {
+          "id": "b2",
+          "text": "Designed RESTful APIs supporting multi-role workflows (admin, supervisor, client) for project tracking, expenses, daily logs, document management, transactions, and punch-list issue tracking",
+          "impact": "enabled end-to-end digitization of construction project operations",
+          "metrics": null
+        },
+        {
+          "id": "b3",
+          "text": "Implemented secure authentication using phone-based OTP, JWT access tokens, and rotating refresh tokens",
+          "impact": "ensured seamless session continuity and improved reliability of login flows",
+          "metrics": "24-hour token rotation with near-zero unintended session drops"
+        },
+        {
+          "id": "b4",
+          "text": "Optimized PostgreSQL performance with indexing and query improvements, eliminating N+1 query patterns",
+          "impact": "improved query efficiency and reduced backend response overhead",
+          "metrics": null
+        },
+        {
+          "id": "b5",
+          "text": "Designed direct-to-S3 file upload flow using pre-signed URLs to bypass backend as a data proxy",
+          "impact": "reduced server load, avoided redundant data transfer, and improved upload efficiency",
+          "metrics": "eliminated double network hop for file uploads"
+        },
+        {
+          "id": "b6",
+          "text": "Diagnosed and fixed a critical token refresh flow issue affecting frontend-backend integration",
+          "impact": "resolved persistent user logout problems and stabilized authentication experience",
+          "metrics": "reduced session failures to near-zero"
+        },
+        {
+          "id": "b7",
+          "text": "Implemented per-user API rate limiting and enforced stateless architecture for serverless constraints",
+          "impact": "improved system resilience and mitigated abuse under unpredictable traffic patterns",
+          "metrics": "capped at 5 requests/second per user"
+        },
+        {
+          "id": "b8",
+          "text": "Evaluated and implemented serverless infrastructure over EC2, handling tradeoffs like statelessness and VPC networking constraints",
+          "impact": "reduced idle infrastructure cost while enabling automatic scaling",
+          "metrics": null
+        },
+        {
+          "id": "b9",
+          "text": "Shipped the customer-facing React Native mobile app to general availability on both the iOS App Store and Google Play, including a scripted version-bump and release process",
+          "impact": "took the product from internal builds to a publicly installable app on both stores",
+          "metrics": "28 pull requests merged into the mobile codebase"
+        },
+        {
+          "id": "b10",
+          "text": "Built subscription and billing flows, an organization invite system, transaction tracking, and CSV expense exports",
+          "impact": "closed the loop from project tracking to monetization and back-office reporting",
+          "metrics": null
+        },
+        {
+          "id": "b11",
+          "text": "Resolved platform-specific mobile defects including iOS date picker incompatibility, submit buttons hidden behind the keyboard, and a fragmented file-picker flow consolidated into a single action sheet",
+          "impact": "removed the friction points blocking iOS users from completing core data-entry tasks",
+          "metrics": null
+        },
+        {
+          "id": "b12",
+          "text": "Implemented the in-app account deletion request flow required for App Store compliance",
+          "impact": "unblocked store review and satisfied platform data-rights obligations",
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "id": "exp-swayamrise",
+      "company": "SwayamRise (formerly MyCareerMyWay)",
+      "role": "Backend Engineer Intern",
+      "dates": "2025 -- 2025",
+      "location": "India",
+      "tags": [
+        "backend",
+        "api",
+        "django",
+        "azure",
+        "devops"
+      ],
+      "links": {
+        "company": null
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Developed backend services using Django for a student career counseling platform",
+          "impact": "enabled structured processing of academic and behavioral data for student insights",
+          "metrics": null
+        },
+        {
+          "id": "b2",
+          "text": "Designed and implemented APIs to compute student performance metrics and predict future grades using heuristic-based logic",
+          "impact": "enabled data-driven evaluation and personalized academic guidance",
+          "metrics": null
+        },
+        {
+          "id": "b3",
+          "text": "Built a quiz and assessment system evaluating aptitude across domains (math, reasoning, vocabulary) and mapping results to personality-based career insights",
+          "impact": "enabled personalized career recommendations and counseling workflows",
+          "metrics": "supported multi-section assessments with dynamic scoring"
+        },
+        {
+          "id": "b4",
+          "text": "Implemented pagination and filtering across APIs to improve data access patterns and response efficiency",
+          "impact": "enhanced scalability and usability of API endpoints",
+          "metrics": null
+        },
+        {
+          "id": "b5",
+          "text": "Debugged and reconfigured Nginx reverse proxy to correctly route traffic across multiple subdomains and services",
+          "impact": "resolved deployment conflicts and restored backend accessibility",
+          "metrics": null
+        },
+        {
+          "id": "b6",
+          "text": "Cleaned up legacy deployments and restructured backend/frontend hosting on Azure VM",
+          "impact": "stabilized deployment environment and reduced routing inconsistencies",
+          "metrics": null
+        },
+        {
+          "id": "b7",
+          "text": "Built a webhook-driven CI/CD pipeline using GitHub Actions and custom VM scripts for automated deployments",
+          "impact": "enabled secure, automated deployments without direct SSH access",
+          "metrics": "triggered on every push to main branch"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "qr-dining",
+      "name": "QR Dining (Realtime Hospitality Platform)",
+      "tags": [
+        "backend",
+        "systems",
+        "realtime",
+        "distributed-systems",
+        "multi-tenant",
+        "infrastructure"
+      ],
+      "tech": [
+        "Go",
+        "Gin",
+        "PostgreSQL",
+        "sqlc",
+        "pgx",
+        "Redis",
+        "WebSockets",
+        "Prometheus",
+        "Docker",
+        "Nginx"
+      ],
+      "dates": "Aug 2026 -- Present",
+      "links": {
+        "github": "https://github.com/Mohith1612/qr-dining",
+        "live": null
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Built a session-centric realtime dine-in platform in Go where a table QR code opens a live session that multiple guests and staff collaborate on simultaneously",
+          "impact": "models the actual unit of restaurant work (the table) rather than forcing a user-centric account model onto it",
+          "metrics": "195 commits across 551 files in the release candidate"
+        },
+        {
+          "id": "b2",
+          "text": "Designed a WebSocket hub with per-session room fan-out backed by Redis pub/sub, so order and presence events reach every client on a table without polling",
+          "impact": "keeps guest and kitchen views consistent in real time across independent server processes",
+          "metrics": null
+        },
+        {
+          "id": "b3",
+          "text": "Implemented idempotent order placement with transactional price snapshots and deferred foreign-key constraints to resolve the circular session/host-participant reference",
+          "impact": "guarantees exactly-once order semantics under client retries and flaky mobile networks",
+          "metrics": null
+        },
+        {
+          "id": "b4",
+          "text": "Enforced multi-tenant isolation so cross-branch and cross-organization access is rejected independently of the rollout feature flag, with route-level branch guards as defense in depth",
+          "impact": "treats tenant scope violations as never-legitimate traffic instead of something a staged rollout could learn from",
+          "metrics": "closed an independent security review"
+        },
+        {
+          "id": "b5",
+          "text": "Instrumented the service with Prometheus metrics, structured zerolog output, health and readiness probes, and OpenTelemetry-based tracing",
+          "impact": "made request flow and background worker behaviour observable before first production deployment",
+          "metrics": null
+        },
+        {
+          "id": "b6",
+          "text": "Built the data layer on sqlc-generated type-safe queries over pgx with golang-migrate migrations embedded in the binary",
+          "impact": "eliminated a class of runtime SQL errors and made deployments self-migrating",
+          "metrics": "11 new migrations in the release candidate"
+        }
+      ]
+    },
+    {
+      "id": "wal-engine",
+      "name": "Production-Grade WAL Engine",
+      "tags": [
+        "systems",
+        "storage-engines",
+        "databases",
+        "backend",
+        "infrastructure",
+        "concurrency"
+      ],
+      "tech": [
+        "Go",
+        "Cobra",
+        "Prometheus",
+        "Zap",
+        "CRC32C",
+        "pprof"
+      ],
+      "dates": "May 2026",
+      "links": {
+        "github": "https://github.com/Mohith1612/wal",
+        "live": null
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Built a production-style Write-Ahead Log (WAL) engine in Go with segmented append-only storage, CRC32C corruption detection, deterministic crash recovery, and checkpoint-assisted replay",
+          "impact": "demonstrates database durability internals similar to PostgreSQL WAL and LevelDB/RocksDB logging subsystems",
+          "metrics": "sustained ~1M replayed records/sec with deterministic recovery guarantees"
+        },
+        {
+          "id": "b2",
+          "text": "Designed a concurrent group-commit architecture using a bounded write queue and single writer goroutine with configurable sync, batch, and async durability modes",
+          "impact": "amortizes fsync overhead across concurrent writers while preserving strict LSN ordering guarantees",
+          "metrics": "achieved ~9.8K writes/sec in batch mode with 100 concurrent writers"
+        },
+        {
+          "id": "b3",
+          "text": "Implemented crash-consistency and corruption handling features including replay modes, manifest reconciliation, atomic checkpoints, partial-write detection, and fault-injection testing",
+          "impact": "ensures prefix-consistent recovery behavior under truncation, corruption, ENOSPC, and interrupted flush scenarios",
+          "metrics": "validated across 90+ tests including fuzzing, chaos injection, idempotency, and race-safe concurrency testing"
+        },
+        {
+          "id": "b4",
+          "text": "Benchmarked durability and replay tradeoffs across sync policies, concurrent writer scaling, checkpoint-assisted recovery, and segment rotation workloads",
+          "impact": "identified fsync latency and flush interval behavior as primary throughput bottlenecks while validating near-linear group-commit scaling",
+          "metrics": "reduced recovery time by ~2.5x using checkpoint-assisted replay"
+        },
+        {
+          "id": "b5",
+          "text": "Built operational tooling including WAL inspection, integrity verification, corruption visualization, Prometheus metrics, benchmarking suites, and graceful shutdown handling",
+          "impact": "provides production-style observability and debugging capabilities for storage-engine behavior under stress and failure",
+          "metrics": "exposed 13 Prometheus metrics and verified correctness under randomized chaos and recovery loops"
+        }
+      ]
+    },
+    {
+      "id": "distributed-job-queue",
+      "name": "Distributed Job Queue System",
+      "tags": [
+        "backend",
+        "systems",
+        "distributed-systems",
+        "infrastructure",
+        "observability"
+      ],
+      "tech": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Redis",
+        "React",
+        "Docker",
+        "Kubernetes",
+        "OpenTelemetry",
+        "Grafana",
+        "k6"
+      ],
+      "dates": "May 2026",
+      "links": {
+        "github": "https://github.com/Mohith1612/job-queue-system",
+        "live": "https://queue.mohith16.com"
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Built a distributed job queue system with priority scheduling, retry-aware execution, and idempotent request handling",
+          "impact": "ensures reliable asynchronous processing under concurrent load and failure scenarios",
+          "metrics": "validated across ~295k requests with 0 API-level errors"
+        },
+        {
+          "id": "b2",
+          "text": "Designed a multi-queue Redis scheduling architecture using FIFO, priority, and delayed retry queues",
+          "impact": "supports deterministic job ordering, exponential backoff retries, and fair scheduling behavior",
+          "metrics": "sustained ~153 req/s during breakpoint testing at 200 VUs"
+        },
+        {
+          "id": "b3",
+          "text": "Implemented worker recovery, cancellation handling, execution timeouts, and per-job execution logging",
+          "impact": "improves fault tolerance and observability during crashes and long-running task execution",
+          "metrics": "recovered stuck processing jobs automatically on worker startup"
+        },
+        {
+          "id": "b4",
+          "text": "Added a full observability stack with OpenTelemetry instrumentation, Prometheus metrics, Grafana dashboards, Loki logs, and Tempo traces, shipped as a GHCR image via an init container",
+          "impact": "made queue depth, worker throughput, and per-job latency directly measurable rather than inferred",
+          "metrics": null
+        },
+        {
+          "id": "b5",
+          "text": "Conducted extensive k6 stress testing to analyze latency, throughput, queue growth, and bottleneck behavior",
+          "impact": "identified worker throughput as the primary scaling constraint while validating API and database stability",
+          "metrics": "queue depth grew to ~26k jobs under ~100 creates/sec ingress during worker stress testing"
+        },
+        {
+          "id": "b6",
+          "text": "Built and deployed the system using Docker, GitHub Actions CI/CD, and an Oracle ARM64 VM behind Nginx and Cloudflare",
+          "impact": "enabled automated deployments and reproducible infrastructure setup",
+          "metrics": "deployed API, worker, PostgreSQL, and Redis as containerized services"
+        },
+        {
+          "id": "b7",
+          "text": "Packaged the backend for a local single-node Kubernetes (kind) cluster using Deployments, Services, ConfigMaps, and Secrets",
+          "impact": "demonstrates working knowledge of core Kubernetes primitives and pod-to-pod service discovery via cluster DNS",
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "id": "canvas",
+      "name": "Collaborative Canvas",
+      "tags": [
+        "systems",
+        "realtime",
+        "frontend",
+        "backend",
+        "distributed-systems"
+      ],
+      "tech": [
+        "TypeScript",
+        "React",
+        "WebSockets",
+        "uWebSockets.js",
+        "Yjs",
+        "Nginx",
+        "k6"
+      ],
+      "dates": "Mar 2026 -- Apr 2026",
+      "links": {
+        "github": "https://github.com/Mohith1612/canvas",
+        "live": "https://canvas.mohith16.com"
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Built a real-time collaborative canvas using WebSockets and CRDT-based state synchronization (Yjs), shared by URL with no auth or database",
+          "impact": "enables conflict-free multi-user editing without centralized locking",
+          "metrics": null
+        },
+        {
+          "id": "b2",
+          "text": "Designed a binary WebSocket protocol with room-based fan-out using uWebSockets.js for efficient message distribution",
+          "impact": "supports high-frequency real-time updates with minimal overhead",
+          "metrics": "handles ~140 messages/sec under load"
+        },
+        {
+          "id": "b3",
+          "text": "Conducted load testing using k6 to evaluate connection scalability and system behavior under stress",
+          "impact": "identified stable operating range and validated graceful degradation characteristics",
+          "metrics": "stable up to ~150 concurrent users; tested up to 300 users"
+        },
+        {
+          "id": "b4",
+          "text": "Analyzed latency distribution (p95, max) and connection behavior to diagnose queueing under high concurrency",
+          "impact": "revealed event-loop and connection handling bottlenecks without system failure",
+          "metrics": "p95 latency ~460ms at 150 users; ~17s at 300 users"
+        },
+        {
+          "id": "b5",
+          "text": "Architected system to degrade gracefully under load instead of failing, maintaining connection integrity",
+          "impact": "ensures reliability and predictability under stress conditions",
+          "metrics": "100% connection success rate with no dropped sessions"
+        }
+      ]
+    },
+    {
+      "id": "museigen-reconciliation",
+      "name": "Entity Reconciliation Service",
+      "tags": [
+        "backend",
+        "api",
+        "data-engineering"
+      ],
+      "tech": [
+        "Python",
+        "FastAPI",
+        "uv"
+      ],
+      "dates": "Jul 2026",
+      "links": {
+        "github": "https://github.com/Mohith1612/museigen-reconciliation-service",
+        "live": null
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Built a FastAPI service that collapses messy, mutually conflicting records into a single reconciled profile per entity",
+          "impact": "turns unreliable multi-source input into one grounded record downstream systems can trust",
+          "metrics": null
+        },
+        {
+          "id": "b2",
+          "text": "Derived an unresolved-issue flag from a model output but gated it on verification against the underlying source note before trusting it",
+          "impact": "prevents unverified model output from propagating into reconciled data",
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "id": "portfolio",
+      "name": "Personal Portfolio",
+      "tags": [
+        "frontend",
+        "web"
+      ],
+      "tech": [
+        "Astro",
+        "React",
+        "TypeScript",
+        "Three.js"
+      ],
+      "dates": "Dec 2025 -- Present",
+      "links": {
+        "github": "https://github.com/Mohith1612/portfolio",
+        "live": "https://mohith16.com"
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Built a static-first portfolio with Astro, React, and Three.js under a deliberate subtraction-over-addition design constraint",
+          "impact": "communicates technical depth without sacrificing load performance",
+          "metrics": null
+        },
+        {
+          "id": "b2",
+          "text": "Structured content around system design decisions, tradeoffs, and real engineering problems rather than feature lists",
+          "impact": "improves positioning for technical reviewers who care about reasoning over surface",
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "name": "Engineering Blog",
+      "tags": [
+        "writing",
+        "systems",
+        "web"
+      ],
+      "tech": [
+        "Astro",
+        "TypeScript",
+        "Cloudflare Pages"
+      ],
+      "dates": "Jan 2026 -- Present",
+      "links": {
+        "github": "https://github.com/Mohith1612/blog",
+        "live": "https://blog.mohith16.com"
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Write technical essays on system design, performance engineering, and real-world debugging experiences",
+          "impact": "demonstrates structured thinking and deep understanding of engineering tradeoffs",
+          "metrics": null
+        },
+        {
+          "id": "b2",
+          "text": "Built the site as a writing-first static blog on Astro with no CSS framework, optimized for durability over churn",
+          "impact": "keeps the publishing surface maintainable with near-zero dependency drift",
+          "metrics": null
+        }
+      ]
+    }
+  ],
+  "openSource": [
+    {
+      "id": "oss-cloud-init",
+      "project": "cloud-init",
+      "org": "Canonical",
+      "repo": "https://github.com/canonical/cloud-init",
+      "description": "Industry-standard multi-distribution cloud instance initialisation, shipped by every major cloud provider",
+      "role": "Contributor",
+      "dates": "Aug 2026 -- Present",
+      "tags": [
+        "open-source",
+        "python",
+        "typing",
+        "linux",
+        "infrastructure"
+      ],
+      "prs": {
+        "merged": 4,
+        "open": 3
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Added static type annotations across core modules (templater, EC2 source helpers, kernel cmdline net config, user_data, ug_util) as part of the project's incremental typing effort",
+          "impact": "expands mypy coverage in a codebase that boots instances on every major cloud provider",
+          "metrics": "5 typing PRs, 4 merged",
+          "url": "https://github.com/canonical/cloud-init/pull/6989"
+        },
+        {
+          "id": "b2",
+          "text": "Fixed isort configuration to skip gitignored files, removing spurious lint failures from local and CI runs",
+          "impact": "reduced developer friction in the pre-commit workflow",
+          "metrics": null,
+          "url": "https://github.com/canonical/cloud-init/pull/7011"
+        },
+        {
+          "id": "b3",
+          "text": "Corrected the documented default dsmode for the ConfigDrive datasource after tracing the actual runtime behaviour",
+          "impact": "removed a documentation/behaviour mismatch that misled datasource users",
+          "metrics": null,
+          "url": "https://github.com/canonical/cloud-init/pull/7009"
+        }
+      ]
+    },
+    {
+      "id": "oss-typeshed",
+      "project": "typeshed",
+      "org": "Python",
+      "repo": "https://github.com/python/typeshed",
+      "description": "The canonical collection of Python type stubs, consumed by mypy, Pyright, and every major Python type checker",
+      "role": "Contributor",
+      "dates": "Aug 2026 -- Present",
+      "tags": [
+        "open-source",
+        "python",
+        "typing",
+        "developer-tooling"
+      ],
+      "prs": {
+        "merged": 3,
+        "open": 1
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Added missing return type annotations to the docker stubs across secret, node, and container model operations",
+          "impact": "improved type-checking accuracy for every downstream project using docker-py",
+          "metrics": "3 PRs merged",
+          "url": "https://github.com/python/typeshed/pull/16185"
+        },
+        {
+          "id": "b2",
+          "text": "Proposed separating Pyright basic and stricter check configurations in the CI test matrix",
+          "impact": "allows stub quality to be ratcheted up incrementally without blocking on strict-mode failures",
+          "metrics": "115 lines across 3 files",
+          "url": "https://github.com/python/typeshed/pull/16280"
+        }
+      ]
+    },
+    {
+      "id": "oss-heliox",
+      "project": "Heliox-OS",
+      "org": "VyomKulshrestha",
+      "repo": "https://github.com/VyomKulshrestha/Heliox-OS",
+      "description": "An agent-oriented operating environment built around LLM-driven background agents",
+      "role": "Contributor",
+      "dates": "May 2026",
+      "tags": [
+        "open-source",
+        "backend",
+        "systems",
+        "wasm",
+        "llm",
+        "concurrency"
+      ],
+      "prs": {
+        "merged": 6,
+        "open": 0
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Built a WASM-based sandboxed plugin runtime allowing untrusted plugins to execute under capability isolation",
+          "impact": "enabled third-party extensibility without granting host system access",
+          "metrics": "648 lines across 5 files",
+          "url": "https://github.com/VyomKulshrestha/Heliox-OS/pull/247"
+        },
+        {
+          "id": "b2",
+          "text": "Implemented a persistent-PTY terminal agent and an RSS/Atom polling agent with background news summarization",
+          "impact": "added long-lived stateful agent capabilities to the runtime",
+          "metrics": "two features, 748 lines across 14 files",
+          "url": "https://github.com/VyomKulshrestha/Heliox-OS/pull/186"
+        },
+        {
+          "id": "b3",
+          "text": "Added a token bucket rate limiter and a global API budget tracker for LLM calls",
+          "impact": "bounded runaway token spend and protected against upstream provider rate limits",
+          "metrics": "652 lines across 9 files",
+          "url": "https://github.com/VyomKulshrestha/Heliox-OS/pull/98"
+        },
+        {
+          "id": "b4",
+          "text": "Documented the WebSocket JSON-RPC IPC message formats used between the runtime and its agents",
+          "impact": "gave contributors a reference for the previously undocumented wire protocol",
+          "metrics": "991-line specification",
+          "url": "https://github.com/VyomKulshrestha/Heliox-OS/pull/43"
+        }
+      ]
+    },
+    {
+      "id": "oss-signoz",
+      "project": "SigNoz",
+      "org": "SigNoz",
+      "repo": "https://github.com/SigNoz/signoz",
+      "description": "Open-source, OpenTelemetry-native observability platform (APM, traces, logs, metrics)",
+      "role": "Contributor",
+      "dates": "Jul 2026 -- Present",
+      "tags": [
+        "open-source",
+        "observability",
+        "kubernetes",
+        "typescript",
+        "prometheus"
+      ],
+      "prs": {
+        "merged": 0,
+        "open": 3
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Fixed the logs explorer to seed list ordering from the compositeQuery URL parameter, so shared and bookmarked links restore the intended sort",
+          "impact": "made explorer URLs faithfully reproducible across sessions",
+          "metrics": "237 lines across 7 files",
+          "url": "https://github.com/SigNoz/signoz/pull/12356"
+        },
+        {
+          "id": "b2",
+          "text": "Decoupled container ports from service ports in the SigNoz Helm charts",
+          "impact": "unblocked deployments where the two must differ, such as sidecar and host-network topologies",
+          "metrics": null,
+          "url": "https://github.com/SigNoz/charts/pull/899"
+        },
+        {
+          "id": "b3",
+          "text": "Contributed a Prometheus node exporter dashboard to the community dashboard library",
+          "impact": "gave SigNoz users host-level infrastructure monitoring out of the box",
+          "metrics": "2,004-line dashboard definition",
+          "url": "https://github.com/SigNoz/dashboards/pull/397"
+        }
+      ]
+    },
+    {
+      "id": "oss-autovoiceevals",
+      "project": "autovoiceevals",
+      "org": "ArchishmanSengupta",
+      "repo": "https://github.com/ArchishmanSengupta/autovoiceevals",
+      "description": "A self-improving evaluation loop for voice AI agents, built on Karpathy's autoresearch",
+      "role": "Contributor",
+      "dates": "Mar 2026",
+      "tags": [
+        "open-source",
+        "python",
+        "llm",
+        "voice",
+        "evaluation"
+      ],
+      "prs": {
+        "merged": 1,
+        "open": 0
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Added a LiveKit provider integration driving evaluation traffic over LiveKit data channels",
+          "impact": "extended the harness beyond its original single-provider assumption",
+          "metrics": "520 lines across 9 files",
+          "url": "https://github.com/ArchishmanSengupta/autovoiceevals/pull/3"
+        }
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "id": "pub-pcos-ensemble",
+      "title": "Advanced Vision Transformer Ensemble for Automated Polycystic Ovary Syndrome Classification: A Deep Learning Approach with GPU Optimisation",
+      "authors": [
+        "N Mohith",
+        "N Vinutha",
+        "R Bhavana B",
+        "P Muthireddy",
+        "M Lakshmanan"
+      ],
+      "author_position": 1,
+      "venue": "2025 IEEE International Conference on Intelligent Signal Processing and Effective Communication Technologies (INSPECT)",
+      "publisher": "IEEE",
+      "pages": "1-6",
+      "year": 2025,
+      "type": "conference",
+      "citations": 0,
+      "tags": [
+        "machine-learning",
+        "computer-vision",
+        "medical-imaging"
+      ],
+      "links": {
+        "doi": "https://doi.org/10.1109/INSPECT67393.2025.11350562",
+        "paper": null
+      }
+    },
+    {
+      "id": "pub-pcos-yolo",
+      "title": "Explainable AI for PCOS Diagnosis: A YOLOv8 and Vision Transformer Approach",
+      "authors": [
+        "N. Mohith",
+        "N. Vinutha"
+      ],
+      "author_position": 1,
+      "venue": "Congress on Smart Computing Technologies (CSCT)",
+      "series": "Smart Innovation, Systems and Technologies",
+      "publisher": "Springer Nature Singapore",
+      "pages": "763-775",
+      "year": 2025,
+      "type": "book-chapter",
+      "citations": 1,
+      "tags": [
+        "machine-learning",
+        "explainable-ai",
+        "computer-vision",
+        "medical-imaging"
+      ],
+      "links": {
+        "doi": "https://doi.org/10.1007/978-981-96-6254-8_55",
+        "paper": null
+      }
+    },
+    {
+      "id": "pub-leaf-cnn",
+      "title": "Optimizing CNNs for Leaf Disease Detection: A Comparative Analysis of Algorithms, Activation functions, and Performance Metrics",
+      "authors": [
+        "Nitisha S",
+        "Mohith N",
+        "Vinay R",
+        "Monika Agarwal",
+        "Aparajita Sinha",
+        "Mokshitha M"
+      ],
+      "author_position": 2,
+      "venue": "2024 IEEE Silchar Subsection Conference (SILCON 2024)",
+      "publisher": "IEEE",
+      "pages": "1-6",
+      "year": 2024,
+      "type": "conference",
+      "citations": 0,
+      "tags": [
+        "machine-learning",
+        "computer-vision"
+      ],
+      "links": {
+        "doi": "https://doi.org/10.1109/SILCON63976.2024.10910754",
+        "paper": null
+      }
+    },
+    {
+      "id": "pub-wine-xai",
+      "title": "Understanding Red Wine Quality with Feature Importance in Machine Learning and Explainable AI",
+      "authors": [
+        "Ayain John",
+        "Navya Damodar",
+        "N Mohith",
+        "Bharathy Vijayan"
+      ],
+      "author_position": 3,
+      "venue": "2024 15th International Conference on Computing Communication and Networking Technologies (ICCCNT)",
+      "publisher": "IEEE",
+      "pages": "1-6",
+      "year": 2024,
+      "type": "conference",
+      "citations": 6,
+      "tags": [
+        "machine-learning",
+        "explainable-ai"
+      ],
+      "links": {
+        "doi": "https://doi.org/10.1109/ICCCNT61001.2024.10724210",
+        "paper": null
+      }
+    }
+  ],
+  "skills": [
+    {
+      "category": "Languages",
+      "items": [
+        "Go",
+        "Python",
+        "TypeScript",
+        "JavaScript",
+        "SQL"
+      ]
+    },
+    {
+      "category": "Backend",
+      "items": [
+        "FastAPI",
+        "Gin",
+        "Django",
+        "SQLAlchemy",
+        "Alembic",
+        "Pydantic",
+        "sqlc",
+        "REST APIs",
+        "WebSockets"
+      ]
+    },
+    {
+      "category": "Data & Messaging",
+      "items": [
+        "PostgreSQL",
+        "Redis",
+        "Redis Pub/Sub",
+        "CRDTs (Yjs)"
+      ]
+    },
+    {
+      "category": "Infrastructure & Cloud",
+      "items": [
+        "Docker",
+        "Kubernetes",
+        "AWS (Lambda",
+        "S3)",
+        "Azure",
+        "Nginx",
+        "Cloudflare",
+        "GitHub Actions",
+        "Linux"
+      ]
+    },
+    {
+      "category": "Observability & Testing",
+      "items": [
+        "OpenTelemetry",
+        "Prometheus",
+        "Grafana",
+        "Loki",
+        "Tempo",
+        "SigNoz",
+        "k6",
+        "pytest"
+      ]
+    },
+    {
+      "category": "Frontend",
+      "items": [
+        "React",
+        "Astro",
+        "Three.js"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "school": "Dayananda Sagar University",
+      "location": "Bangalore, India",
+      "degree": "Bachelor of Technology in Computer Science",
+      "dates": "Aug 2021 -- Jun 2025"
+    }
+  ]
+}

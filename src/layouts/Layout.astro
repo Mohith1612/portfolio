@@ -1,63 +1,119 @@
 ---
+import instrumentFont from "@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url";
+import monoFont from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url";
+import CustomCursor from "../components/cursor/CustomCursor.astro";
+import Navbar from "../components/navigation/Navbar.astro";
+import ThemeToggle from "../components/ui/ThemeToggle.astro";
+import { profile } from "../data/portfolio";
 import "../styles/global.css";
-import Navbar from "../components/navigation/Navbar";
-import ThemeToggle from "../components/ui/ThemeToggle";
-import CustomCursor from "../components/cursor/CustomCursor";
 
 interface Props {
-	title: string;
-	description?: string;
+  title: string;
+  description?: string;
+  image?: string;
+  robots?: string;
+  showNavigation?: boolean;
 }
 
-const { title, description = "Portfolio" } = Astro.props;
+const {
+  title,
+  description = "Mohith N is a backend and systems engineer building reliable distributed software and production platforms.",
+  image = "/og-image.png",
+  robots = "index, follow",
+  showNavigation = true,
+} = Astro.props;
+
+const site = Astro.site ?? new URL(profile.website);
+const canonicalURL = new URL(Astro.url.pathname, site);
+const socialImage = new URL(image, site);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: profile.website,
+  email: `mailto:${profile.email}`,
+  jobTitle: "Backend and Systems Engineer",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Bangalore",
+    addressCountry: "IN",
+  },
+  sameAs: [profile.github, profile.linkedin, profile.scholar],
+};
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" id="theme-color" content="#090909" />
+    <meta name="color-scheme" content="dark light" />
 
-		<script is:inline>
-			(function () {
-				try {
-					const localTheme = localStorage.getItem("theme");
-					const supportDarkMode = window.matchMedia(
-						"(prefers-color-scheme: dark)",
-					).matches;
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={instrumentFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={monoFont} as="font" type="font/woff2" crossorigin />
 
-					if (
-						localTheme === "light" ||
-						(!localTheme && !supportDarkMode)
-					) {
-						document.documentElement.classList.add("light");
-					} else {
-						document.documentElement.classList.remove("light");
-					}
-				} catch (e) {
-					console.error("Theme setup failed", e);
-				}
-			})();
-		</script>
-	</head>
-	<body
-		class="bg-background text-foreground antialiased selection:bg-accent selection:text-white transition-colors duration-500"
-	>
-		<!-- Interactive Systems -->
-		<CustomCursor client:load />
-		<Navbar client:load />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mohith N" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mohith N — Backend and systems engineer" />
 
-		<!-- Fixed Theme Toggle (Always Accessible) -->
-		<div class="fixed top-6 right-6 z-50">
-			<ThemeToggle client:load />
-		</div>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
 
-		<main class="w-full flex-1 flex flex-col items-center">
-			<slot />
-		</main>
-	</body>
+    <title>{title}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <script is:inline>
+      (() => {
+        try {
+          const storedTheme = localStorage.getItem("theme");
+          const systemPrefersLight = window.matchMedia(
+            "(prefers-color-scheme: light)",
+          ).matches;
+          const theme =
+            storedTheme === "light" || storedTheme === "dark"
+              ? storedTheme
+              : systemPrefersLight
+                ? "light"
+                : "dark";
+
+          document.documentElement.classList.toggle("light", theme === "light");
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+          document
+            .querySelector('meta[name="theme-color"]')
+            ?.setAttribute("content", theme === "light" ? "#fbfaf7" : "#090909");
+        } catch {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
+  </head>
+  <body class="antialiased selection:bg-accent selection:text-accent-foreground">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    {showNavigation && <Navbar />}
+
+    <div class="theme-control">
+      <ThemeToggle />
+    </div>
+
+    <CustomCursor />
+
+    <main id="main-content" tabindex="-1" class="w-full flex-1 flex flex-col items-center">
+      <slot />
+    </main>
+  </body>
 </html>

@@ -9,8 +9,6 @@
   ],
   "compilerOptions": {
     "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
     "paths": {
       "@/*": [
         "./src/*"

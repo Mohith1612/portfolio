@@ -1,34 +1,42 @@
 ---
-import HeroParticlesThree from "../visuals/HeroParticlesThree";
+import HeroField from "../visuals/HeroField.astro";
+import { profile } from "../../data/portfolio";
 ---
 
 <section
-  class="relative w-full min-h-[100vh] flex flex-col justify-center items-center overflow-hidden"
+  class="hero-section relative flex w-full flex-col items-center justify-center overflow-hidden"
 >
-  <!-- Visual Background: Three.js -->
-  <HeroParticlesThree client:load />
+  <HeroField />
 
-  <!-- Content -->
   <div
-    class="z-10 text-center space-y-6 px-6 max-w-4xl opacity-0 animate-[fade-in_1s_ease-out_0.5s_forwards]"
+    class="hero-copy z-10 max-w-4xl space-y-6 px-6 text-center"
   >
     <h1
-      class="text-5xl md:text-7xl font-bold tracking-tight text-foreground"
-      style="mask-image: radial-gradient(ellipse at center, black 30%, rgba(0, 0, 0, 0.85) 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 30%, rgba(0, 0, 0, 0.85) 80%);"
+      class="text-balance text-5xl font-semibold tracking-[-0.045em] text-foreground md:text-7xl"
     >
-      Mohith
+      {profile.name}
     </h1>
     <p
-      class="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto"
+      class="text-balance mx-auto max-w-2xl text-xl font-light leading-relaxed text-muted-foreground md:text-2xl"
     >
-      Digital architect crafting calm, resilient systems. <br />
-      Specializing in performance and subtraction.
+      Backend and systems engineer building reliable software from storage
+      primitives to production platforms.
     </p>
+    <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+      {profile.location} · Founding Engineer at SiteSmart India
+    </p>
+
+    <nav aria-label="Profile links" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 pt-1">
+      <a class="text-link text-link--accent" href={`mailto:${profile.email}`}>Email</a>
+      <a class="text-link text-link--accent" href="/resume">Résumé</a>
+      <a class="text-link text-link--accent" href={profile.github} target="_blank" rel="noreferrer">
+        GitHub ↗
+      </a>
+    </nav>
   </div>
 
-  <!-- Scroll Indicator -->
-  <div class="absolute bottom-12 animate-pulse opacity-40 text-foreground">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div class="hero-scroll-cue absolute bottom-10 text-muted-foreground" aria-hidden="true">
+    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
