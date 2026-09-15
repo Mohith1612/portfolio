@@ -61,6 +61,14 @@ const projectCopy = {
     proof: "Independent tenant-isolation security review closed",
     caseStudy: null,
   },
+  "billboard-me": {
+    title: "Billboard.me",
+    description:
+      "A marketplace for physical advertising surfaces people already own and occupy — a laptop lid, a jersey — currently live as a public landing page and two waitlist funnels behind an invite-only rollout.",
+    proof:
+      "Server-only data layer · RLS with no client policies · per-role denial tests",
+    caseStudy: null,
+  },
   "wal-engine": {
     title: "Production-Grade WAL Engine",
     description:
@@ -161,19 +169,19 @@ export const education = resume.education.map((item) => ({
 
 export const writing = [
   {
-    title: "Why Freehand Drawing Becomes a Bottleneck",
-    date: "2026-05-05",
-    link: "https://blog.mohith16.com/posts/building-canvas-03-freehand-drawing",
+    title: "The Missing Layer Between AI Planning and AI Coding",
+    date: "2026-09-11",
+    link: "https://blog.mohith16.com/posts/the-missing-layer-between-ai-planning-and-ai-coding/",
   },
   {
-    title: "Inside the Rendering Engine of a Canvas App",
-    date: "2026-05-03",
-    link: "https://blog.mohith16.com/posts/building-canvas-02-rendering-engine",
+    title: "GPT-6 Astra Is Better Aligned. It Is Also Harder to Watch.",
+    date: "2026-09-04",
+    link: "https://blog.mohith16.com/posts/gpt-6-astra-is-better-aligned-and-harder-to-watch/",
   },
   {
-    title: "What Building a Drawing App Taught Me About Performance",
-    date: "2026-04-30",
-    link: "https://blog.mohith16.com/posts/building-canvas-01-about",
+    title: "Anthropic Released One Model Twice. The Difference Is the Guardrails.",
+    date: "2026-09-02",
+    link: "https://blog.mohith16.com/posts/anthropic-released-one-model-twice/",
   },
 ];
 

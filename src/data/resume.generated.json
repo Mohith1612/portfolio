@@ -228,9 +228,66 @@
         },
         {
           "id": "b6",
-          "text": "Built the data layer on sqlc-generated type-safe queries over pgx with golang-migrate migrations embedded in the binary",
-          "impact": "eliminated a class of runtime SQL errors and made deployments self-migrating",
-          "metrics": "11 new migrations in the release candidate"
+          "text": "Made OpenAPI the single source of truth for the frontend contract, regenerating the spec from the actual handler and sqlc response types and adding CI checks that diff gin.Engine.Routes() against the spec in both directions and fail on generated-type drift",
+          "impact": "turned a hand-maintained spec that silently disagreed with the server into a checked contract the frontend compiles against",
+          "metrics": "surfaced 6 undocumented or missing routes plus money-type, nullability, and field-omission drift across 9 schemas"
+        }
+      ]
+    },
+    {
+      "id": "billboard-me",
+      "name": "Billboard.me (Physical Advertising Marketplace)",
+      "tags": [
+        "backend",
+        "web",
+        "product",
+        "data-modeling",
+        "security"
+      ],
+      "tech": [
+        "TypeScript",
+        "Next.js",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Supabase",
+        "Zod",
+        "Tailwind CSS"
+      ],
+      "dates": "Sep 2026 -- Present",
+      "links": {
+        "github": "https://github.com/Mohith1612/billboard-me",
+        "live": null
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Building a marketplace for physical advertising inventory, where individuals sell surfaces they already own and occupy (a MacBook lid, a jersey) as ad spots; currently shipped as a public landing page and two waitlist funnels behind an invite-only, high-touch rollout",
+          "impact": "keeps the public surface honest about what actually exists while the demand side is validated by hand",
+          "metrics": null
+        },
+        {
+          "id": "b2",
+          "text": "Closed the client-exposure path on the waitlist data layer by poisoning the database module as server-only, enabling RLS with no client policies, and revoking all table privileges from the Supabase anon and authenticated roles",
+          "impact": "made browser-side access to the table structurally impossible rather than merely unrouted",
+          "metrics": "verified by disposable-Postgres tests asserting fresh-install, upgrade, and per-role denial"
+        },
+        {
+          "id": "b3",
+          "text": "Replaced non-null assertions on environment variables with a validated split between public and server-only config, deferring database client creation to first use so static builds no longer require a live database",
+          "impact": "turned three latent misconfigurations into startup-time errors that name the variable without echoing the secret",
+          "metrics": null
+        },
+        {
+          "id": "b4",
+          "text": "Ran the project as a spec-driven, review-gated pipeline: a single AGENTS.md contract, a staged issue backlog, ADRs for architectural decisions, and a strict issue to branch to PR to human-review flow with no self-merges",
+          "impact": "let coding agents do implementation work without letting undocumented or unreviewed changes reach main",
+          "metrics": "51 tracked issues staged across launch, beta, and public phases"
+        },
+        {
+          "id": "b5",
+          "text": "Kept the domain model generic across asset categories while exposing only two publicly, and held documentation to matching the code rather than the plan",
+          "impact": "avoids a schema rewrite when the catalogue expands, and keeps planning docs from claiming features that do not exist",
+          "metrics": null
         }
       ]
     },
@@ -507,9 +564,9 @@
       "bullets": [
         {
           "id": "b1",
-          "text": "Write technical essays on system design, performance engineering, and real-world debugging experiences",
+          "text": "Write technical essays on system design, performance engineering, and real-world debugging, including three long-form build series that take the WAL engine, job queue, and collaborative canvas apart decision by decision",
           "impact": "demonstrates structured thinking and deep understanding of engineering tradeoffs",
-          "metrics": null
+          "metrics": "35 posts, including three 10-part series"
         },
         {
           "id": "b2",
@@ -537,27 +594,34 @@
         "infrastructure"
       ],
       "prs": {
-        "merged": 4,
-        "open": 3
+        "merged": 6,
+        "open": 4
       },
       "bullets": [
         {
           "id": "b1",
-          "text": "Added static type annotations across core modules (templater, EC2 source helpers, kernel cmdline net config, user_data, ug_util) as part of the project's incremental typing effort",
+          "text": "Added static type annotations across core modules (templater, EC2 source helpers, kernel cmdline net config, user_data, ug_util, the CloudStack datasource, and ephemeral network setup) as part of the project's incremental typing effort",
           "impact": "expands mypy coverage in a codebase that boots instances on every major cloud provider",
-          "metrics": "5 typing PRs, 4 merged",
+          "metrics": "8 typing PRs, 5 merged",
           "url": "https://github.com/canonical/cloud-init/pull/6989"
         },
         {
           "id": "b2",
+          "text": "Fixed a silent config bug where an ssh_import_id set inside a default user definition was parsed, matched by the module's own activation check, and then dropped, by merging the top-level and per-user sources",
+          "impact": "made a documented key actually take effect for the default user without changing behaviour for anyone else",
+          "metrics": null,
+          "url": "https://github.com/canonical/cloud-init/pull/7050"
+        },
+        {
+          "id": "b3",
           "text": "Fixed isort configuration to skip gitignored files, removing spurious lint failures from local and CI runs",
           "impact": "reduced developer friction in the pre-commit workflow",
           "metrics": null,
           "url": "https://github.com/canonical/cloud-init/pull/7011"
         },
         {
-          "id": "b3",
-          "text": "Corrected the documented default dsmode for the ConfigDrive datasource after tracing the actual runtime behaviour",
+          "id": "b4",
+          "text": "Traced ConfigDrive dsmode resolution through DataSource._determine_dsmode to correct documentation that listed an invalid value as the default",
           "impact": "removed a documentation/behaviour mismatch that misled datasource users",
           "metrics": null,
           "url": "https://github.com/canonical/cloud-init/pull/7009"
@@ -847,11 +911,15 @@
         "FastAPI",
         "Gin",
         "Django",
+        "Next.js",
         "SQLAlchemy",
         "Alembic",
+        "Drizzle ORM",
         "Pydantic",
+        "Zod",
         "sqlc",
         "REST APIs",
+        "OpenAPI",
         "WebSockets"
       ]
     },
@@ -859,6 +927,8 @@
       "category": "Data & Messaging",
       "items": [
         "PostgreSQL",
+        "Supabase",
+        "Row-Level Security",
         "Redis",
         "Redis Pub/Sub",
         "CRDTs (Yjs)"
@@ -888,14 +958,18 @@
         "Tempo",
         "SigNoz",
         "k6",
-        "pytest"
+        "pytest",
+        "Playwright",
+        "mypy"
       ]
     },
     {
       "category": "Frontend",
       "items": [
         "React",
+        "Next.js",
         "Astro",
+        "Tailwind CSS",
         "Three.js"
       ]
     }
