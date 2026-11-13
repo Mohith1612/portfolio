@@ -29,9 +29,10 @@ export const profile = {
 const experienceCopy = {
   "exp-sitesmart": {
     summary:
-      "Built the serverless FastAPI backend and shipped the React Native product to both app stores. Designed multi-role workflows, authentication, billing, direct-to-S3 uploads, and the PostgreSQL data layer behind daily production use.",
+      "Built the serverless FastAPI backend and shipped the React Native product to both app stores. Designed multi-role workflows, authentication, billing, direct-to-S3 uploads, and the PostgreSQL data layer, then led a typed-API refactor of the app and made money creates retry-safe on flaky site networks.",
     detail: "AWS Lambda · FastAPI · PostgreSQL · React Native",
-    proof: "iOS & Android general availability · 28 merged mobile PRs",
+    proof:
+      "iOS & Android general availability · 259 mobile + 156 backend merged PRs",
   },
   "exp-swayamrise": {
     summary:
@@ -59,14 +60,6 @@ const projectCopy = {
     description:
       "A multi-tenant realtime hospitality platform built around shared table sessions, with Redis-backed WebSocket fan-out, idempotent ordering, and strict tenant isolation.",
     proof: "Independent tenant-isolation security review closed",
-    caseStudy: null,
-  },
-  "billboard-me": {
-    title: "Billboard.me",
-    description:
-      "A marketplace for physical advertising surfaces people already own and occupy — a laptop lid, a jersey — currently live as a public landing page and two waitlist funnels behind an invite-only rollout.",
-    proof:
-      "Server-only data layer · RLS with no client policies · per-role denial tests",
     caseStudy: null,
   },
   "wal-engine": {
@@ -106,10 +99,10 @@ export const projects = Object.entries(projectCopy).map(([id, copy]) => {
 });
 
 const selectedOpenSourceIds = [
+  "oss-floci",
   "oss-cloud-init",
   "oss-typeshed",
   "oss-heliox",
-  "oss-signoz",
 ];
 
 export const openSource = selectedOpenSourceIds.map((id) => {
@@ -138,7 +131,9 @@ export const publications = resume.publications.map((publication) => ({
   venue:
     publication.publisher === "Springer Nature Singapore"
       ? `Springer · ${publication.venue}`
-      : `IEEE · ${publication.venue.replace(/^202\d IEEE /, "")}`,
+      : publication.publisher === "Apple Academic Press"
+        ? `Apple Academic Press · ${publication.venue}`
+        : `IEEE · ${publication.venue.replace(/^202\d IEEE /, "")}`,
   year: String(publication.year),
   link: publication.links.doi,
 }));

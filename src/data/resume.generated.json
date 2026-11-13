@@ -82,7 +82,7 @@
           "id": "b9",
           "text": "Shipped the customer-facing React Native mobile app to general availability on both the iOS App Store and Google Play, including a scripted version-bump and release process",
           "impact": "took the product from internal builds to a publicly installable app on both stores",
-          "metrics": "28 pull requests merged into the mobile codebase"
+          "metrics": "259 pull requests merged into the mobile codebase and 156 into the backend"
         },
         {
           "id": "b10",
@@ -100,6 +100,30 @@
           "id": "b12",
           "text": "Implemented the in-app account deletion request flow required for App Store compliance",
           "impact": "unblocked store review and satisfied platform data-rights obligations",
+          "metrics": null
+        },
+        {
+          "id": "b13",
+          "text": "Led a typed-API-boundary refactor of the React Native codebase: typed navigators, contexts, services, and every feature's API calls, split the monolithic Redux slices and upload service into modules, removed an import cycle, and made no-explicit-any a lint error",
+          "impact": "turned an untyped data layer into a compiler-checked one and made the large slice files reviewable",
+          "metrics": "40 refactor pull requests, zero any in app code"
+        },
+        {
+          "id": "b14",
+          "text": "Made money creates retry-safe end to end: the backend accepts client-generated IDs for expenses and transactions and the app retries with them, alongside fixes for create replies without an ID, retry credentials after network errors, and expense page retries",
+          "impact": "stopped flaky site connectivity from producing duplicate expenses or transactions",
+          "metrics": null
+        },
+        {
+          "id": "b15",
+          "text": "Hardened authentication and upload reliability: moved the refresh token into Keychain/Keystore, revoked refresh tokens and cancelled in-flight uploads on sign-out, decoded base64url JWT segments correctly, kept undelivered attachments retryable, validated stored objects on upload confirmation, and serialized attachment cleanup with confirmation",
+          "impact": "closed credential-at-rest and orphaned-upload gaps while keeping field users' photos from being lost on poor networks",
+          "metrics": null
+        },
+        {
+          "id": "b16",
+          "text": "Upgraded the app from Expo SDK 54 through SDK 58 (React Native 0.88.1, Android API 36) and added CI that builds the Android release and smoke-launches it on an emulator for every PR",
+          "impact": "kept the app on a supported platform and caught release-build and launch failures before merge",
           "metrics": null
         }
       ]
@@ -235,58 +259,62 @@
       ]
     },
     {
-      "id": "billboard-me",
-      "name": "Billboard.me (Physical Advertising Marketplace)",
+      "id": "puzzle-platform",
+      "name": "Puzzle Platform (Procedurally Generated Logic Puzzles)",
       "tags": [
         "backend",
-        "web",
-        "product",
-        "data-modeling",
-        "security"
+        "api",
+        "frontend",
+        "observability",
+        "developer-tooling"
       ],
       "tech": [
-        "TypeScript",
-        "Next.js",
+        "Python",
+        "FastAPI",
         "PostgreSQL",
-        "Drizzle ORM",
-        "Supabase",
-        "Zod",
-        "Tailwind CSS"
+        "Astro",
+        "React",
+        "TypeScript",
+        "OpenTelemetry",
+        "SigNoz",
+        "Playwright",
+        "Docker",
+        "uv"
       ],
-      "dates": "Sep 2026 -- Present",
+      "dates": "Oct 2026 -- Present",
       "links": {
-        "github": "https://github.com/Mohith1612/billboard-me",
+        "github": null,
         "live": null
       },
       "bullets": [
         {
           "id": "b1",
-          "text": "Building a marketplace for physical advertising inventory, where individuals sell surfaces they already own and occupy (a MacBook lid, a jersey) as ad spots; currently shipped as a public landing page and two waitlist funnels behind an invite-only, high-touch rollout",
-          "impact": "keeps the public surface honest about what actually exists while the demand side is validated by hand",
-          "metrics": null
+          "text": "Building a platform for procedurally generated logic puzzles whose launch game is Queens, served from an offline-generated Catalog where a puzzle is admitted only if it has exactly one solution reachable through named human deductions, with a Daily Challenge, Streaks, and graded Hints",
+          "impact": "keeps generation off the request path and guarantees every served puzzle is solvable by reasoning rather than guessing",
+          "metrics": "127 commits and 24 merged pull requests in under three weeks"
         },
         {
           "id": "b2",
-          "text": "Closed the client-exposure path on the waitlist data layer by poisoning the database module as server-only, enabling RLS with no client policies, and revoking all table privileges from the Supabase anon and authenticated roles",
-          "impact": "made browser-side access to the table structurally impossible rather than merely unrouted",
-          "metrics": "verified by disposable-Postgres tests asserting fresh-install, upgrade, and per-role denial"
+          "text": "Kept the solution server-side: the solution-bearing payload never leaves the API, the server recognises a solve rather than trusting a client assertion, and hints reveal the engine's next sound deduction in graded steps from technique to placement",
+          "impact": "removes the answer from the client and makes hints teach the deduction instead of leaking the cell",
+          "metrics": null
         },
         {
           "id": "b3",
-          "text": "Replaced non-null assertions on environment variables with a validated split between public and server-only config, deferring database client creation to first use so static builds no longer require a live database",
-          "impact": "turned three latent misconfigurations into startup-time errors that name the variable without echoing the secret",
+          "text": "Designed identity and data-rights flows around privacy: session-scoped guests, players minted on first completion behind an HttpOnly cookie, reversible merges on credential collision, and guarded erasure with read-only previews and deletion gated on re-proving identity with Google",
+          "impact": "treats deletion and retention as designed behaviour before launch rather than a retrofit",
           "metrics": null
         },
         {
           "id": "b4",
-          "text": "Ran the project as a spec-driven, review-gated pipeline: a single AGENTS.md contract, a staged issue backlog, ADRs for architectural decisions, and a strict issue to branch to PR to human-review flow with no self-merges",
-          "impact": "let coding agents do implementation work without letting undocumented or unreviewed changes reach main",
-          "metrics": "51 tracked issues staged across launch, beta, and public phases"
+          "text": "Instrumented with OpenTelemetry to self-hosted SigNoz and enforced a no-identifier rule mechanically, with an attribute allowlist, collector-config and span-attribute checks, and rejection of span link attributes",
+          "impact": "keeps player and attempt identifiers out of every span, log, and metric by construction instead of by convention",
+          "metrics": null
         },
         {
           "id": "b5",
-          "text": "Kept the domain model generic across asset categories while exposing only two publicly, and held documentation to matching the code rather than the plan",
-          "impact": "avoids a schema rewrite when the catalogue expands, and keeps planning docs from claiming features that do not exist",
+          "text": "Built the production-readiness path: an explicit migration runner with separated database roles, liveness and readiness probes for the deploy gate, a locked non-root API image, and a monitor for the Daily Challenge runway",
+          "impact": "separates schema changes from runtime privileges and gates deploys on real readiness",
           "metrics": null
         }
       ]
@@ -566,7 +594,7 @@
           "id": "b1",
           "text": "Write technical essays on system design, performance engineering, and real-world debugging, including three long-form build series that take the WAL engine, job queue, and collaborative canvas apart decision by decision",
           "impact": "demonstrates structured thinking and deep understanding of engineering tradeoffs",
-          "metrics": "35 posts, including three 10-part series"
+          "metrics": "38 posts, including three 10-part series"
         },
         {
           "id": "b2",
@@ -578,6 +606,98 @@
     }
   ],
   "openSource": [
+    {
+      "id": "oss-floci",
+      "project": "Floci",
+      "org": "floci-io",
+      "repo": "https://github.com/floci-io/floci",
+      "description": "Free, lightweight local emulator for AWS services, ~31k GitHub stars",
+      "role": "Contributor",
+      "dates": "Oct 2026 -- Present",
+      "tags": [
+        "open-source",
+        "java",
+        "aws",
+        "infrastructure",
+        "developer-tooling"
+      ],
+      "prs": {
+        "merged": 16,
+        "open": 0
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Implemented ECS ephemeral task volumes, backing each name-only or empty-host volume with a task-owned Docker volume shared across the task's containers, honouring read-only mounts, and cleaning storage up across failed launches, stops, natural exits, and restarts via labelled reconciliation",
+          "impact": "let containers in the same ECS task share files, which the emulator had previously accepted but silently skipped",
+          "metrics": "1,064 lines across 16 files",
+          "url": "https://github.com/floci-io/floci/pull/5511"
+        },
+        {
+          "id": "b2",
+          "text": "Fixed ECS services created with a capacity provider strategy never launching tasks, by computing per-provider targets from the base/weight distribution and filling each provider's deficit for the current deployment",
+          "impact": "made mixed FARGATE/FARGATE_SPOT services start, scale, and replace tasks correctly; verified end to end with the AWS Java SDK ServicesStable waiter",
+          "metrics": "274 lines across 5 files",
+          "url": "https://github.com/floci-io/floci/pull/5500"
+        },
+        {
+          "id": "b3",
+          "text": "Added x-amz-mp-object-size validation to S3 CompleteMultipartUpload, checked under the multipart lock before assembly, with InvalidRequest errors for mismatched, malformed, overflowing, and negative sizes",
+          "impact": "brought the emulator in line with AWS, which rejects uploads whose parts don't sum to the declared size, instead of storing truncated objects",
+          "metrics": "240 lines across 6 files",
+          "url": "https://github.com/floci-io/floci/pull/5643"
+        },
+        {
+          "id": "b4",
+          "text": "Fixed the ELBv2 load balancer collapsing repeated target response headers to their last value, sharing one header-copy path between HTTP and WebSocket upgrade responses",
+          "impact": "restored responses that set multiple cookies through the ALB",
+          "metrics": null,
+          "url": "https://github.com/floci-io/floci/pull/5628"
+        },
+        {
+          "id": "b5",
+          "text": "Fixed CloudWatch PutMetricData silently dropping datums nested under EntityMetricData, the shape the CloudWatch Agent sends, across the Query, JSON 1.0, and CBOR protocol paths; followed up by rejecting datums without a MetricName with AWS-compatible MissingParameter errors, validating every datum before any is stored",
+          "impact": "made CloudWatch Agent metrics such as mem_used_percent and disk_used_percent actually appear in ListMetrics and GetMetricStatistics",
+          "metrics": "2 PRs, 613 lines across 14 files",
+          "url": "https://github.com/floci-io/floci/pull/6070"
+        },
+        {
+          "id": "b6",
+          "text": "Fixed the Cognito SOFTWARE_TOKEN_MFA challenge to return USER_ID_FOR_SRP and FRIENDLY_DEVICE_NAME as AWS does, through one shared challenge builder used by every auth flow that issues it",
+          "impact": "let clients build the USERNAME and SECRET_HASH needed to answer the MFA challenge, which they previously could not",
+          "metrics": "388 lines across 9 files",
+          "url": "https://github.com/floci-io/floci/pull/6086"
+        },
+        {
+          "id": "b7",
+          "text": "Added MaxResults/Limit and NextToken pagination to SQS ListQueues and EventBridge ListRules, built on the shared cursor-based paginator so pages stay stable while resources are created and deleted, with AWS-shaped errors for invalid limits and tokens",
+          "impact": "matched the AWS page-size caps and token semantics, so SDK paginators and clients with large numbers of queues or rules see complete, consistent listings",
+          "metrics": "2 PRs, 715 lines across 13 files",
+          "url": "https://github.com/floci-io/floci/pull/6222"
+        },
+        {
+          "id": "b8",
+          "text": "Made DynamoDB Query read only the requested partition's key range instead of visiting every item in the table, and stopped copying the whole table on every write in memory mode by keeping the live item map by reference for in-memory stores while durable modes still get a snapshot",
+          "impact": "made query and write cost track partition size rather than table size, as on AWS, with responses unchanged",
+          "metrics": "2 PRs, 288 lines across 6 files; a 20-item partition query in a 100,000-item table fell from 21.7 ms to 1.4 ms, and PutItem p50 at 100,000 items from 14.7 ms to 1.4 ms",
+          "url": "https://github.com/floci-io/floci/pull/6668"
+        },
+        {
+          "id": "b9",
+          "text": "Implemented Cognito AdminListUserAuthEvents for Plus pools with threat protection, recording password and SRP sign-ins through new-password and MFA challenges, returning events newest first with MaxResults/NextToken pagination, keying history by user sub so a recreated username never inherits the old history, and following up by rejecting fractional, overflowing, and wrongly typed MaxResults values in this and the WebAuthn listing",
+          "impact": "replaced an UnsupportedOperation error with the AWS-shaped operation that admin tooling calls, verified against the AWS Java SDK v2",
+          "metrics": "2 PRs, 1,417 lines across 12 files; 21 new tests, with the broader Cognito suite (1,697 tests) passing",
+          "url": "https://github.com/floci-io/floci/pull/7404"
+        },
+        {
+          "id": "b10",
+          "text": "Fixed two account- and region-fidelity gaps: Bedrock AgentCore tag calls answered ResourceNotFound in any non-default account because the ARN was checked against the default account rather than the request's, and RDS never returned HostedZoneId on clusters or instance endpoints, adding a generated per-region fact with a us-east-1 fallback",
+          "impact": "restored tagging for non-default accounts while keeping tags isolated per account, and let Terraform's aws_rds_cluster.hosted_zone_id and Route 53 alias records pointing at RDS endpoints work",
+          "metrics": "2 PRs, 217 lines across 13 files",
+          "url": "https://github.com/floci-io/floci/pull/6826"
+        }
+      ]
+    },
     {
       "id": "oss-cloud-init",
       "project": "cloud-init",
@@ -594,23 +714,16 @@
         "infrastructure"
       ],
       "prs": {
-        "merged": 6,
-        "open": 4
+        "merged": 9,
+        "open": 1
       },
       "bullets": [
         {
           "id": "b1",
           "text": "Added static type annotations across core modules (templater, EC2 source helpers, kernel cmdline net config, user_data, ug_util, the CloudStack datasource, and ephemeral network setup) as part of the project's incremental typing effort",
           "impact": "expands mypy coverage in a codebase that boots instances on every major cloud provider",
-          "metrics": "8 typing PRs, 5 merged",
+          "metrics": "7 typing PRs merged",
           "url": "https://github.com/canonical/cloud-init/pull/6989"
-        },
-        {
-          "id": "b2",
-          "text": "Fixed a silent config bug where an ssh_import_id set inside a default user definition was parsed, matched by the module's own activation check, and then dropped, by merging the top-level and per-user sources",
-          "impact": "made a documented key actually take effect for the default user without changing behaviour for anyone else",
-          "metrics": null,
-          "url": "https://github.com/canonical/cloud-init/pull/7050"
         },
         {
           "id": "b3",
@@ -620,11 +733,39 @@
           "url": "https://github.com/canonical/cloud-init/pull/7011"
         },
         {
-          "id": "b4",
-          "text": "Traced ConfigDrive dsmode resolution through DataSource._determine_dsmode to correct documentation that listed an invalid value as the default",
-          "impact": "removed a documentation/behaviour mismatch that misled datasource users",
-          "metrics": null,
-          "url": "https://github.com/canonical/cloud-init/pull/7009"
+          "id": "b5",
+          "text": "Fixed the default-user unlock path wiping a user-supplied password hash: when sssd was installed but unconfigured, passwd -u succeeded while shadow's sss_cache call wrote unrelated output to stderr, and any stderr was treated as a refused unlock on an empty password, triggering passwd -d. The fallback now runs only when the shadow file confirms the password is really empty",
+          "impact": "preserved hashed_passwd values that were being silently erased on affected images, without changing the existing empty-password unlock behaviour",
+          "metrics": "51 lines across 2 files",
+          "url": "https://github.com/canonical/cloud-init/pull/7191"
+        }
+      ]
+    },
+    {
+      "id": "oss-lxd",
+      "project": "LXD",
+      "org": "Canonical",
+      "repo": "https://github.com/canonical/lxd",
+      "description": "Powerful system container and virtual machine manager",
+      "role": "Contributor",
+      "dates": "Nov 2026 -- Present",
+      "tags": [
+        "open-source",
+        "linux",
+        "infrastructure",
+        "testing"
+      ],
+      "prs": {
+        "merged": 0,
+        "open": 1
+      },
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Added a PKI test proving a CA-signed server certificate plus client.ca lets lxc remote add succeed with no fingerprint prompt and no pinned certificate, with a negative control that the prompt still appears without client.ca",
+          "impact": "closed an untested gap: existing PKI tests only used self-signed server certificates, so the CA trust path was never exercised",
+          "metrics": "51 lines in 1 file; verified the positive case fails when the client.ca copy is removed",
+          "url": "https://github.com/canonical/lxd/pull/19480"
         }
       ]
     },
@@ -789,6 +930,34 @@
   ],
   "publications": [
     {
+      "id": "pub-pneumonia-chapter",
+      "title": "Integrated Framework for Pneumonia Prediction from Chest X-ray Images: Comparative Analysis of Machine Learning and Deep Learning Models Leveraging Transfer Learning Techniques",
+      "authors": [
+        "Monika Agarwal",
+        "R. Vinay",
+        "N. Mohith",
+        "Y. Chaitanya Shiva Srinivas",
+        "S. Nitisha",
+        "M. Mokshitha"
+      ],
+      "author_position": 3,
+      "venue": "Integrating Biomedical Image Processing and Informatics for Healthcare",
+      "publisher": "Apple Academic Press",
+      "pages": "247-275",
+      "year": 2026,
+      "type": "book-chapter",
+      "citations": 0,
+      "tags": [
+        "machine-learning",
+        "computer-vision",
+        "medical-imaging"
+      ],
+      "links": {
+        "doi": "https://doi.org/10.1201/9781779520609-14",
+        "paper": null
+      }
+    },
+    {
       "id": "pub-pcos-ensemble",
       "title": "Advanced Vision Transformer Ensemble for Automated Polycystic Ovary Syndrome Classification: A Deep Learning Approach with GPU Optimisation",
       "authors": [
@@ -883,7 +1052,7 @@
       "pages": "1-6",
       "year": 2024,
       "type": "conference",
-      "citations": 6,
+      "citations": 7,
       "tags": [
         "machine-learning",
         "explainable-ai"
@@ -902,6 +1071,7 @@
         "Python",
         "TypeScript",
         "JavaScript",
+        "Java",
         "SQL"
       ]
     },
@@ -940,7 +1110,10 @@
         "Docker",
         "Kubernetes",
         "AWS (Lambda",
-        "S3)",
+        "S3",
+        "ECS",
+        "DynamoDB",
+        "Cognito)",
         "Azure",
         "Nginx",
         "Cloudflare",
@@ -967,6 +1140,8 @@
       "category": "Frontend",
       "items": [
         "React",
+        "React Native",
+        "Expo",
         "Next.js",
         "Astro",
         "Tailwind CSS",

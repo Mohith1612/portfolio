@@ -10,8 +10,22 @@ import {
   resumeData,
 } from "../data/portfolio";
 
+const selectedExperienceBulletIds: Record<string, string[]> = {
+  "exp-sitesmart": ["b1", "b9", "b13", "b14", "b15", "b5"],
+};
+
 const topExperienceBullets = Object.fromEntries(
-  resumeData.experience.map((job) => [job.id, job.bullets.slice(0, job.id === "exp-sitesmart" ? 5 : 3)]),
+  resumeData.experience.map((job) => {
+    const ids = selectedExperienceBulletIds[job.id];
+    const bullets = ids
+      ? ids.map((id) => {
+          const bullet = job.bullets.find((entry) => entry.id === id);
+          if (!bullet) throw new Error(`ResumeX bullet not found: ${job.id}/${id}`);
+          return bullet;
+        })
+      : job.bullets.slice(0, 3);
+    return [job.id, bullets];
+  }),
 );
 ---
 
