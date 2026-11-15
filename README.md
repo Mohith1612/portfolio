@@ -41,7 +41,7 @@ Override that location when needed:
 RESUMEX_DATA_DIR=/absolute/path/to/data/mohith npm run sync:resume
 ```
 
-The shared schema in `src/data/resumex-schema.ts` validates the snapshot before sync writes and when the site loads it during build. Errors identify invalid field paths. Extra fields are accepted, unknown publishers are rejected, and the phone number is omitted from the snapshot. The generated snapshot is written to `src/data/resume.generated.json`. Hand-picked ResumeX ids and their order live in `src/data/curation.ts`; portfolio-specific presentation copy, writing links, and case-study framing live in `src/data/portfolio.ts`. Hero, about, and footer editorial copy lives in `src/data/site-copy.ts`.
+The shared schema in `src/data/resumex-schema.ts` validates the snapshot before sync writes and when the site loads it during build. Errors identify invalid field paths. Extra fields are accepted, unknown publishers are rejected, and the phone number is omitted from the snapshot. The generated snapshot is written to `src/data/resume.generated.json`. Hand-picked ResumeX ids and their order live in `src/data/curation.ts`; portfolio-specific presentation copy and writing links live in `src/data/portfolio.ts`. Case-study prose lives in `src/content/case-studies/`: each document has `projectId` and `eyebrow` frontmatter and a challenge paragraph body. Case-study order, `introBulletId`, and `decisionIds` remain in `src/data/curation.ts`. Hero, about, and footer editorial copy lives in `src/data/site-copy.ts`.
 
 ## Structure
 
@@ -50,6 +50,8 @@ scripts/                    ResumeX sync and link validation
 src/components/sections/    Homepage sections
 src/components/layout/      Cursor, navigation, theme control, and footer
 src/components/visuals/     Lightweight Canvas hero field
+src/content.config.ts       Case-study content schema
+src/content/case-studies/   Case-study prose documents
 src/data/                   Generated facts, schema, curation, and presentation model
 src/data/site-copy.ts       Hero, about, and footer editorial copy
 src/lib/                    Pure formatting and selection helpers
