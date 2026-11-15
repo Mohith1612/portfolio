@@ -1,3 +1,5 @@
+import writingSnapshot from "./writing.generated.json";
+import { parseWriting } from "./writing-schema";
 import { getCollection } from "astro:content";
 import { experienceIds, projectIds, selectedOpenSourceIds, caseStudyProjectIds, caseStudyBulletIds } from "@/data/curation";
 import snapshot from "./resume.generated.json";
@@ -140,23 +142,7 @@ export const education = resume.education.map((item) => ({
   dates: formatRange(item.dates),
 }));
 
-export const writing = [
-  {
-    title: "The Missing Layer Between AI Planning and AI Coding",
-    date: "2026-09-11",
-    link: "https://blog.mohith16.com/posts/the-missing-layer-between-ai-planning-and-ai-coding/",
-  },
-  {
-    title: "GPT-6 Astra Is Better Aligned. It Is Also Harder to Watch.",
-    date: "2026-09-04",
-    link: "https://blog.mohith16.com/posts/gpt-6-astra-is-better-aligned-and-harder-to-watch/",
-  },
-  {
-    title: "Anthropic Released One Model Twice. The Difference Is the Guardrails.",
-    date: "2026-09-02",
-    link: "https://blog.mohith16.com/posts/anthropic-released-one-model-twice/",
-  },
-];
+export const writing = parseWriting(writingSnapshot);
 
 const entries = await getCollection("case-studies");
 const curatedIds = new Set<string>(caseStudyProjectIds);
