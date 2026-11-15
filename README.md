@@ -48,10 +48,10 @@ The generated snapshot is written to `src/data/resume.generated.json`. Portfolio
 ```text
 scripts/                    ResumeX sync and link validation
 src/components/sections/    Homepage sections
-src/components/navigation/  Static navigation shell
-src/components/ui/          Theme control
+src/components/layout/      Cursor, navigation, theme control, and footer
 src/components/visuals/     Lightweight Canvas hero field
 src/data/                   Generated facts and presentation model
+src/lib/                    Pure formatting and selection helpers
 src/layouts/                Shared metadata and page shell
 src/pages/                  Homepage, résumé, case studies, and 404
 src/styles/                 Global tokens, type, motion, and utilities

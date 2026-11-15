@@ -1,7 +1,7 @@
 ---
-import Footer from "../../components/sections/Footer.astro";
-import Layout from "../../layouts/Layout.astro";
-import { caseStudies } from "../../data/portfolio";
+import Footer from "@/components/layout/Footer.astro";
+import Layout from "@/layouts/Layout.astro";
+import { caseStudies } from "@/data/portfolio";
 
 export function getStaticPaths() {
   return caseStudies.map((project) => ({
