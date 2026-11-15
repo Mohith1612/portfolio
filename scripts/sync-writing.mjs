@@ -7,9 +7,15 @@ const source = process.env.WRITING_FEED || "https://blog.mohith16.com/rss.xml";
 const output = fileURLToPath(new URL("../src/data/writing.generated.json", import.meta.url));
 async function readFeed() {
   if (/^https?:\/\//i.test(source)) {
-    const response = await fetch(source, { signal: AbortSignal.timeout(10000) });
-    if (response.status !== 200) throw new Error(`Feed ${source} returned HTTP ${response.status}`);
-    return response.text();
+    let response;
+    try {
+      response = await fetch(source, { signal: AbortSignal.timeout(10000) });
+      if (response.status === 200) return await response.text();
+    } catch (error) {
+      if (error.name === "TimeoutError") throw new Error(`Feed ${source} timed out after 10 s`);
+      throw new Error(`Could not fetch feed ${source}: ${error.cause?.code || error.cause?.message || error.message}`);
+    }
+    throw new Error(`Feed ${source} returned HTTP ${response.status}`);
   }
   if (/^[a-z][\w+.-]*:/i.test(source) && !source.startsWith("file:")) throw new Error(`Unsupported feed source: ${source}`);
   return readFile(source.startsWith("file:") ? new URL(source) : source, "utf8");
