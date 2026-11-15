@@ -19,13 +19,14 @@ Requires Node.js 22.19 or newer. Run `nvm use` to select the version recorded in
 npm install          # install dependencies
 npm run dev          # start Astro locally
 npm run sync:resume  # regenerate portfolio data from ResumeX YAML
+npm run sync:resume:check # check the committed snapshot without writing
 npm run check        # run Astro and TypeScript checks
 npm run build        # build the static site to dist/
 npm run check:links  # validate external links in the built homepage
 npm run verify       # run checks and a production build
 ```
 
-npm is the only supported package manager. Commit `package-lock.json` together with any `package.json` change.
+npm is the only supported package manager. Commit `package-lock.json` alongside dependency changes; script-only changes do not require a lockfile edit.
 
 ## Content workflow
 
@@ -40,6 +41,8 @@ Override that location when needed:
 ```bash
 RESUMEX_DATA_DIR=/absolute/path/to/data/mohith npm run sync:resume
 ```
+
+Run `npm run sync:resume:check` to validate the YAML and compare its exact serialized output with the committed snapshot without writing files. It exits zero when current and non-zero on errors or differences. Set `RESUMEX_DATA_DIR` for a nonstandard checkout, as above.
 
 The shared schema in `src/data/resumex-schema.ts` validates the snapshot before sync writes and when the site loads it during build. Errors identify invalid field paths. Extra fields are accepted, unknown publishers are rejected, and the phone number is omitted from the snapshot. The generated snapshot is written to `src/data/resume.generated.json`. Hand-picked ResumeX ids and their order live in `src/data/curation.ts`; portfolio-specific presentation copy and writing links live in `src/data/portfolio.ts`. Case-study prose lives in `src/content/case-studies/`: each document has `projectId` and `eyebrow` frontmatter and a challenge paragraph body. Case-study order, `introBulletId`, and `decisionIds` remain in `src/data/curation.ts`. Hero, about, and footer editorial copy lives in `src/data/site-copy.ts`.
 
@@ -62,5 +65,7 @@ public/                     Brand, crawl, and host configuration files
 ```
 
 ## Deployment
+
+GitHub Actions runs `npm ci` and `npm run verify` on pull requests and pushes to main. CI does not run `sync:resume:check` because the sibling ResumeX data is absent.
 
 The output is fully static. Build with `npm run build` and publish `dist/` on any static host. The included `_headers` file is understood by hosts such as Cloudflare Pages and Netlify; configure equivalent headers in the platform dashboard when using another provider.
