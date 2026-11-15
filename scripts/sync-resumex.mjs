@@ -39,9 +39,9 @@ for (const [key, filename] of Object.entries(sources)) {
 }
 
 if (resume.meta !== null && typeof resume.meta === "object") delete resume.meta.phone;
-const validated = parseResume(resume);
+parseResume(resume);
 
 await mkdir(path.dirname(outputFile), { recursive: true });
-await writeFile(outputFile, `${JSON.stringify(validated, null, 2)}\n`);
+await writeFile(outputFile, `${JSON.stringify(resume, null, 2)}\n`);
 
 console.log(`Synced ResumeX data to ${path.relative(process.cwd(), outputFile)}`);
