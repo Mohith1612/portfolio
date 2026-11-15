@@ -41,7 +41,34 @@ for (const [key, filename] of Object.entries(sources)) {
 if (resume.meta !== null && typeof resume.meta === "object") delete resume.meta.phone;
 parseResume(resume);
 
-await mkdir(path.dirname(outputFile), { recursive: true });
-await writeFile(outputFile, `${JSON.stringify(resume, null, 2)}\n`);
+const expected = `${JSON.stringify(resume, null, 2)}\n`;
 
-console.log(`Synced ResumeX data to ${path.relative(process.cwd(), outputFile)}`);
+if (process.argv.includes("--check")) {
+  let actual;
+  try {
+    actual = await readFile(outputFile, "utf8");
+  } catch (error) {
+    throw new Error(`Unable to read ResumeX snapshot at ${outputFile}`, { cause: error });
+  }
+  if (actual === expected) {
+    console.log("ResumeX snapshot is up to date");
+  } else {
+    let snapshot;
+    try {
+      snapshot = JSON.parse(actual);
+    } catch (error) {
+      throw new Error(`Invalid ResumeX snapshot JSON at ${outputFile}`, { cause: error });
+    }
+    const keys = new Set([...Object.keys(resume), ...Object.keys(snapshot ?? {})]);
+    const differences = [...keys].filter((key) =>
+      !Object.hasOwn(resume, key) || !Object.hasOwn(snapshot ?? {}, key) ||
+      JSON.stringify(resume[key]) !== JSON.stringify(snapshot[key]),
+    );
+    console.error(`ResumeX snapshot differs: ${differences.join(", ") || "snapshot serialization (key order/formatting)"}`);
+    process.exitCode = 1;
+  }
+} else {
+  await mkdir(path.dirname(outputFile), { recursive: true });
+  await writeFile(outputFile, expected);
+  console.log(`Synced ResumeX data to ${path.relative(process.cwd(), outputFile)}`);
+}

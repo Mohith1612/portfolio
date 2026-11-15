@@ -12,6 +12,7 @@
     "check": "astro check",
     "verify": "npm run check && npm run build",
     "sync:resume": "node scripts/sync-resumex.mjs",
+    "sync:resume:check": "node scripts/sync-resumex.mjs --check",
     "check:links": "node scripts/check-links.mjs",
     "astro": "astro"
   },
