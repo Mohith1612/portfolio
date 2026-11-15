@@ -1,3 +1,4 @@
+import { experienceIds, projectIds, selectedOpenSourceIds, caseStudyProjectIds, caseStudyBulletIds } from "@/data/curation";
 import resume from "./resume.generated.json";
 
 import { formatRange, formatPublicationVenue } from "@/lib/format";
@@ -11,14 +12,14 @@ export const profile = {
 };
 
 const experienceCopy = {
-  "exp-sitesmart": {
+  [experienceIds[0]]: {
     summary:
       "Built the serverless FastAPI backend and shipped the React Native product to both app stores. Designed multi-role workflows, authentication, billing, direct-to-S3 uploads, and the PostgreSQL data layer, then led a typed-API refactor of the app and made money creates retry-safe on flaky site networks.",
     detail: "AWS Lambda · FastAPI · PostgreSQL · React Native",
     proof:
       "iOS & Android general availability · 259 mobile + 156 backend merged PRs",
   },
-  "exp-swayamrise": {
+  [experienceIds[1]]: {
     summary:
       "Developed Django APIs for student assessment and career guidance, then stabilized the Azure deployment with Nginx routing and a webhook-driven CI/CD pipeline.",
     detail: "Django · Azure · Nginx · GitHub Actions",
@@ -26,7 +27,7 @@ const experienceCopy = {
   },
 } as const;
 
-export const experience = ["exp-sitesmart", "exp-swayamrise"].map((id) => {
+export const experience = experienceIds.map((id) => {
   const item = findById(resume.experience, id);
 
   return {
@@ -39,28 +40,28 @@ export const experience = ["exp-sitesmart", "exp-swayamrise"].map((id) => {
 });
 
 const projectCopy = {
-  "qr-dining": {
+  [projectIds[0]]: {
     title: "QR Dining",
     description:
       "A multi-tenant realtime hospitality platform built around shared table sessions, with Redis-backed WebSocket fan-out, idempotent ordering, and strict tenant isolation.",
     proof: "Independent tenant-isolation security review closed",
     caseStudy: null,
   },
-  "wal-engine": {
+  [projectIds[1]]: {
     title: "Production-Grade WAL Engine",
     description:
       "A segmented write-ahead log with CRC32C integrity checks, group commit, deterministic crash recovery, checkpoints, fault injection, and operational tooling.",
     proof: "~1M records/sec replay · 90+ tests · race-safe concurrency",
     caseStudy: "/work/wal-engine",
   },
-  "distributed-job-queue": {
+  [projectIds[2]]: {
     title: "Distributed Job Queue",
     description:
       "Priority scheduling, delayed retries, worker recovery, and end-to-end observability, tested under sustained concurrent load and failure scenarios.",
     proof: "~295K requests · 0 API errors · ~153 req/s breakpoint",
     caseStudy: "/work/distributed-job-queue",
   },
-  canvas: {
+  [projectIds[3]]: {
     title: "Collaborative Canvas",
     description:
       "A URL-shared collaborative drawing surface using Yjs CRDTs and a binary WebSocket protocol, load-tested to find its real operating limits.",
@@ -69,7 +70,8 @@ const projectCopy = {
   },
 } as const;
 
-export const projects = Object.entries(projectCopy).map(([id, copy]) => {
+export const projects = projectIds.map((id) => {
+  const copy = projectCopy[id];
   const item = findById(resume.projects, id);
 
   return {
@@ -81,13 +83,6 @@ export const projects = Object.entries(projectCopy).map(([id, copy]) => {
     github: item.links.github,
   };
 });
-
-const selectedOpenSourceIds = [
-  "oss-floci",
-  "oss-cloud-init",
-  "oss-typeshed",
-  "oss-heliox",
-];
 
 export const openSource = selectedOpenSourceIds.map((id) => {
   const item = findById(resume.openSource, id);
@@ -160,23 +155,24 @@ export const writing = [
 ];
 
 const caseStudyCopy = {
-  "wal-engine": {
-    slug: "wal-engine",
+  [caseStudyProjectIds[0]]: {
+    slug: caseStudyProjectIds[0],
     eyebrow: "Storage systems",
     challenge:
       "A write-ahead log is only useful when it preserves an unambiguous history through partial writes, corruption, process crashes, and concurrent callers. The project treats recovery behavior—not the append API—as the core product.",
-    decisionIds: ["b2", "b3", "b5"],
+    decisionIds: caseStudyBulletIds[caseStudyProjectIds[0]].decisionIds,
   },
-  "distributed-job-queue": {
-    slug: "distributed-job-queue",
+  [caseStudyProjectIds[1]]: {
+    slug: caseStudyProjectIds[1],
     eyebrow: "Distributed systems",
     challenge:
       "Queue APIs often look correct until retries, worker crashes, and ingress beyond processing capacity expose ambiguous state. This system was built around those failure paths and measured under load rather than demonstrated only at happy-path scale.",
-    decisionIds: ["b2", "b3", "b4", "b6"],
+    decisionIds: caseStudyBulletIds[caseStudyProjectIds[1]].decisionIds,
   },
 } as const;
 
-export const caseStudies = Object.entries(caseStudyCopy).map(([id, copy]) => {
+export const caseStudies = caseStudyProjectIds.map((id) => {
+  const copy = caseStudyCopy[id];
   const project = findById(resume.projects, id);
   const homepageProject = projects.find((item) => item.id === id);
 
@@ -198,7 +194,7 @@ export const caseStudies = Object.entries(caseStudyCopy).map(([id, copy]) => {
   return {
     ...copy,
     ...homepageProject,
-    intro: getBullet(project.bullets, "b1").text,
+    intro: getBullet(project.bullets, caseStudyBulletIds[id].introBulletId).text,
     decisions,
     outcomes: project.bullets
       .map((bullet) => bullet.metrics)

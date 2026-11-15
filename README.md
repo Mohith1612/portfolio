@@ -41,7 +41,7 @@ Override that location when needed:
 RESUMEX_DATA_DIR=/absolute/path/to/data/mohith npm run sync:resume
 ```
 
-The generated snapshot is written to `src/data/resume.generated.json`. Portfolio-specific presentation copy, featured-work selection, writing links, and case-study framing live in `src/data/portfolio.ts`.
+The generated snapshot is written to `src/data/resume.generated.json`. Hand-picked ResumeX ids and their order live in `src/data/curation.ts`; portfolio-specific presentation copy, writing links, and case-study framing live in `src/data/portfolio.ts`.
 
 ## Structure
 
@@ -50,7 +50,7 @@ scripts/                    ResumeX sync and link validation
 src/components/sections/    Homepage sections
 src/components/layout/      Cursor, navigation, theme control, and footer
 src/components/visuals/     Lightweight Canvas hero field
-src/data/                   Generated facts and presentation model
+src/data/                   Generated facts, curation, and presentation model
 src/lib/                    Pure formatting and selection helpers
 src/layouts/                Shared metadata and page shell
 src/pages/                  Homepage, résumé, case studies, and 404
