@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "verify": "npm run check && npm run build",
+    "sync:writing": "node scripts/sync-writing.mjs",
     "sync:resume": "node scripts/sync-resumex.mjs",
     "sync:resume:check": "node scripts/sync-resumex.mjs --check",
     "check:links": "node scripts/check-links.mjs",

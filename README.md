@@ -18,6 +18,7 @@ Requires Node.js 22.19 or newer. Run `nvm use` to select the version recorded in
 ```bash
 npm install          # install dependencies
 npm run dev          # start Astro locally
+npm run sync:writing # refresh the writing snapshot from RSS
 npm run sync:resume  # regenerate portfolio data from ResumeX YAML
 npm run sync:resume:check # check the committed snapshot without writing
 npm run check        # run Astro and TypeScript checks
@@ -44,12 +45,14 @@ RESUMEX_DATA_DIR=/absolute/path/to/data/mohith npm run sync:resume
 
 Run `npm run sync:resume:check` to validate the YAML and compare its exact serialized output with the committed snapshot without writing files. It exits zero when current and non-zero on errors or differences. Set `RESUMEX_DATA_DIR` for a nonstandard checkout, as above.
 
-The shared schema in `src/data/resumex-schema.ts` validates the snapshot before sync writes and when the site loads it during build. Errors identify invalid field paths. Extra fields are accepted, unknown publishers are rejected, and the phone number is omitted from the snapshot. The generated snapshot is written to `src/data/resume.generated.json`. Hand-picked ResumeX ids and their order live in `src/data/curation.ts`; portfolio-specific presentation copy and writing links live in `src/data/portfolio.ts`. Case-study prose lives in `src/content/case-studies/`: each document has `projectId` and `eyebrow` frontmatter and a challenge paragraph body. Case-study order, `introBulletId`, and `decisionIds` remain in `src/data/curation.ts`. Hero, about, and footer editorial copy lives in `src/data/site-copy.ts`.
+The shared schema in `src/data/resumex-schema.ts` validates the snapshot before sync writes and when the site loads it during build. Errors identify invalid field paths. Extra fields are accepted, unknown publishers are rejected, and the phone number is omitted from the snapshot. The generated snapshot is written to `src/data/resume.generated.json`. Hand-picked ResumeX ids and their order live in `src/data/curation.ts`; portfolio-specific presentation copy lives in `src/data/portfolio.ts`. Case-study prose lives in `src/content/case-studies/`: each document has `projectId` and `eyebrow` frontmatter and a challenge paragraph body. Case-study order, `introBulletId`, and `decisionIds` remain in `src/data/curation.ts`. Hero, about, and footer editorial copy lives in `src/data/site-copy.ts`.
+
+After publishing a post, run `npm run sync:writing` to refresh the three newest posts from https://blog.mohith16.com/rss.xml. Set `WRITING_FEED` to an HTTP(S) URL, a local path, or a file URL to use another feed. The validated snapshot is committed at `src/data/writing.generated.json` and validated again when the site loads, so builds do not fetch the feed.
 
 ## Structure
 
 ```text
-scripts/                    ResumeX sync and link validation
+scripts/                    ResumeX and writing sync, and link validation
 src/components/sections/    Homepage sections
 src/components/layout/      Cursor, navigation, theme control, and footer
 src/components/visuals/     Lightweight Canvas hero field
