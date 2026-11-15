@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { parse } from "yaml";
+import { parseResume } from "../src/data/resumex-schema.ts";
 
 const sourceDirectory = process.env.RESUMEX_DATA_DIR
   ? path.resolve(process.env.RESUMEX_DATA_DIR)
@@ -36,6 +37,9 @@ for (const [key, filename] of Object.entries(sources)) {
     );
   }
 }
+
+if (resume.meta !== null && typeof resume.meta === "object") delete resume.meta.phone;
+parseResume(resume);
 
 await mkdir(path.dirname(outputFile), { recursive: true });
 await writeFile(outputFile, `${JSON.stringify(resume, null, 2)}\n`);

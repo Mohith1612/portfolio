@@ -1,8 +1,11 @@
 import { experienceIds, projectIds, selectedOpenSourceIds, caseStudyProjectIds, caseStudyBulletIds } from "@/data/curation";
-import resume from "./resume.generated.json";
+import snapshot from "./resume.generated.json";
+import { parseResume, type Resume } from "./resumex-schema";
 
 import { formatRange, formatPublicationVenue } from "@/lib/format";
 import { findById, getBullet } from "@/lib/select";
+
+const resume: Resume = parseResume(snapshot);
 
 export const resumeData = resume;
 
