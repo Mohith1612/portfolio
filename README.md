@@ -25,7 +25,7 @@ npm run check:links  # validate external links in the built homepage
 npm run verify       # run checks and a production build
 ```
 
-The Bun lockfile is also maintained, so equivalent `bun` commands work.
+npm is the only supported package manager. Commit `package-lock.json` together with any `package.json` change.
 
 ## Content workflow
 
