@@ -1,3 +1,4 @@
+import { getCollection } from "astro:content";
 import { experienceIds, projectIds, selectedOpenSourceIds, caseStudyProjectIds, caseStudyBulletIds } from "@/data/curation";
 import snapshot from "./resume.generated.json";
 import { parseResume, type Resume } from "./resumex-schema";
@@ -157,25 +158,27 @@ export const writing = [
   },
 ];
 
-const caseStudyCopy = {
-  [caseStudyProjectIds[0]]: {
-    slug: caseStudyProjectIds[0],
-    eyebrow: "Storage systems",
-    challenge:
-      "A write-ahead log is only useful when it preserves an unambiguous history through partial writes, corruption, process crashes, and concurrent callers. The project treats recovery behavior—not the append API—as the core product.",
-    decisionIds: caseStudyBulletIds[caseStudyProjectIds[0]].decisionIds,
-  },
-  [caseStudyProjectIds[1]]: {
-    slug: caseStudyProjectIds[1],
-    eyebrow: "Distributed systems",
-    challenge:
-      "Queue APIs often look correct until retries, worker crashes, and ingress beyond processing capacity expose ambiguous state. This system was built around those failure paths and measured under load rather than demonstrated only at happy-path scale.",
-    decisionIds: caseStudyBulletIds[caseStudyProjectIds[1]].decisionIds,
-  },
-} as const;
+const entries = await getCollection("case-studies");
+const curatedIds = new Set<string>(caseStudyProjectIds);
+const documents = new Map<string, (typeof entries)[number]>();
+for (const entry of entries) {
+  if (!curatedIds.has(entry.id)) throw new Error(`Unknown case-study file: ${entry.id}`);
+  if (entry.data.projectId !== entry.id) throw new Error(`Case-study identity mismatch: ${entry.id} and ${entry.data.projectId}`);
+  if (!entry.body?.trim()) throw new Error(`Empty case-study challenge: ${entry.id}`);
+  if (documents.has(entry.id)) throw new Error(`Duplicate case-study identity: ${entry.id}`);
+  documents.set(entry.id, entry);
+}
 
 export const caseStudies = caseStudyProjectIds.map((id) => {
-  const copy = caseStudyCopy[id];
+  const entry = documents.get(id);
+  if (!entry) throw new Error(`Missing case-study Markdown: ${id}`);
+  if (!entry.body?.trim()) throw new Error(`Empty case-study challenge: ${id}`);
+  const copy = {
+    slug: id,
+    eyebrow: entry.data.eyebrow,
+    challenge: entry.body.trim(),
+    decisionIds: caseStudyBulletIds[id].decisionIds,
+  };
   const project = findById(resume.projects, id);
   const homepageProject = projects.find((item) => item.id === id);
 
