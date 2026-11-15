@@ -1,11 +1,11 @@
 ---
 import instrumentFont from "@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url";
 import monoFont from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url";
-import CustomCursor from "../components/cursor/CustomCursor.astro";
-import Navbar from "../components/navigation/Navbar.astro";
-import ThemeToggle from "../components/ui/ThemeToggle.astro";
-import { profile } from "../data/portfolio";
-import "../styles/global.css";
+import CustomCursor from "@/components/layout/CustomCursor.astro";
+import Navbar from "@/components/layout/Navbar.astro";
+import ThemeToggle from "@/components/layout/ThemeToggle.astro";
+import { profile } from "@/data/portfolio";
+import "@/styles/global.css";
 
 interface Props {
   title: string;

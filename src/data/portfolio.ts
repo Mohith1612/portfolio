@@ -1,23 +1,7 @@
 import resume from "./resume.generated.json";
 
-const formatRange = (value: string) => {
-  const [start, end] = value.split(" -- ");
-
-  return end && start === end ? start : value.replaceAll(" -- ", " — ");
-};
-
-const findById = <T extends { id: string }>(items: T[], id: string): T => {
-  const item = items.find((entry) => entry.id === id);
-
-  if (!item) {
-    throw new Error(`ResumeX entry not found: ${id}`);
-  }
-
-  return item;
-};
-
-const getBullet = <T extends { id: string }>(items: T[], id: string): T =>
-  findById(items, id);
+import { formatRange, formatPublicationVenue } from "@/lib/format";
+import { findById, getBullet } from "@/lib/select";
 
 export const resumeData = resume;
 
@@ -128,12 +112,7 @@ export const openSource = selectedOpenSourceIds.map((id) => {
 export const publications = resume.publications.map((publication) => ({
   id: publication.id,
   title: publication.title,
-  venue:
-    publication.publisher === "Springer Nature Singapore"
-      ? `Springer · ${publication.venue}`
-      : publication.publisher === "Apple Academic Press"
-        ? `Apple Academic Press · ${publication.venue}`
-        : `IEEE · ${publication.venue.replace(/^202\d IEEE /, "")}`,
+  venue: formatPublicationVenue(publication),
   year: String(publication.year),
   link: publication.links.doi,
 }));
