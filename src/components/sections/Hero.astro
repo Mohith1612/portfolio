@@ -1,4 +1,5 @@
 ---
+import { heroTagline, heroRoleLine } from "@/data/site-copy";
 import HeroField from "@/components/visuals/HeroField.astro";
 import { profile } from "@/data/portfolio";
 ---
@@ -19,11 +20,10 @@ import { profile } from "@/data/portfolio";
     <p
       class="text-balance mx-auto max-w-2xl text-xl font-light leading-relaxed text-muted-foreground md:text-2xl"
     >
-      Backend and systems engineer building reliable software from storage
-      primitives to production platforms.
+      {heroTagline}
     </p>
     <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-      {profile.location} · Founding Engineer at SiteSmart India
+      {profile.location} · {heroRoleLine}
     </p>
 
     <nav aria-label="Profile links" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 pt-1">

@@ -1,4 +1,5 @@
 ---
+import { footerAvailability, footerDomain } from "@/data/site-copy";
 import { profile } from "@/data/portfolio";
 const year = new Date().getFullYear();
 ---
@@ -10,9 +11,9 @@ const year = new Date().getFullYear();
     <div
       class="flex flex-col gap-1 items-center md:items-start order-2 md:order-1"
     >
-      <span class="text-xs">Available for select collaborations.</span>
+      <span class="text-xs">{footerAvailability}</span>
       <span class="text-xs font-mono">
-        &copy; {year} mohith16.com
+        &copy; {year} {footerDomain}
       </span>
     </div>
 
